@@ -60,14 +60,6 @@
       <Cl au="0" df="" nm="deck_id" nu="0">
         <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
-      <Cl au="0" df="" nm="card_in_collection_id" nu="1">
-        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
-      </Cl>
-      <Fk deAc="3" nm="fk_card_card_in_collection" prLkCl="id" upAc="3">
-        <PrTb mn="0" nm="card_in_collection" oe="1" sch="cg_schema" zr="1"/>
-        <CdTb mn="0" nm="card" oe="1" sch="cg_schema" zr="1"/>
-        <ClPr cdCl="card_in_collection_id" prCl="id"/>
-      </Fk>
       <Fk deAc="3" nm="fk_card_deck" prLkCl="id" upAc="3">
         <PrTb mn="0" nm="deck" oe="1" sch="cg_schema" zr="0"/>
         <CdTb mn="1" nm="card" oe="0" sch="cg_schema" zr="1"/>
@@ -192,6 +184,14 @@
       <Cl au="0" df="" nm="orientation_type_id" nu="1">
         <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
+      <Cl au="0" df="" nm="card_id" nu="0">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_card_in_collection_card" prLkCl="id" upAc="3">
+        <PrTb mn="0" nm="card" oe="1" sch="cg_schema" zr="0"/>
+        <CdTb mn="0" nm="card_in_collection" oe="1" sch="cg_schema" zr="1"/>
+        <ClPr cdCl="card_id" prCl="id"/>
+      </Fk>
       <Fk deAc="3" nm="fk_card_in_collection_collection" prLkCl="id" upAc="3">
         <PrTb mn="0" nm="collection" oe="1" sch="cg_schema" zr="0"/>
         <CdTb mn="1" nm="card_in_collection" oe="0" sch="cg_schema" zr="1"/>
@@ -202,6 +202,10 @@
         <CdTb mn="1" nm="card_in_collection" oe="0" sch="cg_schema" zr="1"/>
         <ClPr cdCl="orientation_type_id" prCl="id"/>
       </Fk>
+      <Idx clu="0" ftx="0" nm="card_in_collection_card_id_Idx" spa="0" unq="1">
+        <ClNs>card_id</ClNs>
+        <OptTx/>
+      </Idx>
       <UniqueConstraints/>
       <SchTrHis/>
     </Tbl>
@@ -916,16 +920,11 @@ join card_definition c_d on dc_d.card_definition_id = c_d.id
     <TbGl bkCl="ff6666ff" sch="cg_schema" tbl="card_in_array" x="6" y="703"/>
     <TbGl bkCl="ff6666ff" sch="cg_schema" tbl="card_in_tabletop" x="26" y="1045"/>
     <TbGl bkCl="ff6666ff" sch="cg_schema" tbl="card_in_grid" x="37" y="919"/>
-    <TbGl bkCl="ff6666ff" sch="cg_schema" tbl="card_in_collection" x="443" y="819"/>
+    <TbGl bkCl="ff6666ff" sch="cg_schema" tbl="card_in_collection" x="442" y="805"/>
     <TbGl bkCl="ff6666ff" sch="cg_schema" tbl="grid_direction_type" x="615" y="924"/>
     <TbGl bkCl="ff6666ff" sch="cg_schema" tbl="grid_proximity_type" x="609" y="1036"/>
     <TbGl bkCl="ff6666ff" sch="cg_schema" tbl="orientation_type" x="949" y="841"/>
     <TbGl bkCl="ff6666ff" sch="cg_schema" tbl="game_definition" x="1421" y="261"/>
-    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="cg_schema.card.fk_card_card_in_collection" parentEdge="NORTH" positioner="OneLineUserLinkPositioner">
-      <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="556" x2="556" y1="819" y2="604"/>
-      </positionableLines>
-    </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="cg_schema.card.fk_card_deck" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
         <positionableLine lineRole="SINGLE_LINE" x1="286" x2="286" y1="439" y2="525"/>
@@ -938,33 +937,38 @@ join card_definition c_d on dc_d.card_definition_id = c_d.id
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="cg_schema.card_in_array.fk_card_in_array_card_in_collection" parentEdge="WEST" positioner="ThreeLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="443" x2="314" y1="826" y2="826"/>
+        <positionableLine lineRole="PARENT_LINE" x1="442" x2="314" y1="812" y2="812"/>
         <positionableLine lineRole="CHILD_LINE" x1="253" x2="306" y1="751" y2="751"/>
-        <positionableLine lineRole="MIDDLE_LINE" x1="310" x2="310" y1="755" y2="822"/>
+        <positionableLine lineRole="MIDDLE_LINE" x1="310" x2="310" y1="755" y2="808"/>
+      </positionableLines>
+    </FkGl>
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="cg_schema.card_in_collection.fk_card_in_collection_card" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="512" x2="512" y1="591" y2="805"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="cg_schema.card_in_collection.fk_card_in_collection_collection" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="805" x2="805" y1="764" y2="820"/>
-        <positionableLine lineRole="CHILD_LINE" x1="775" x2="801" y1="824" y2="824"/>
+        <positionableLine lineRole="PARENT_LINE" x1="805" x2="805" y1="764" y2="806"/>
+        <positionableLine lineRole="CHILD_LINE" x1="774" x2="801" y1="810" y2="810"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="cg_schema.card_in_collection.fk_card_in_collection_orientation_type" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="949" x2="775" y1="861" y2="861"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="949" x2="774" y1="861" y2="861"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="cg_schema.card_in_fan.fk_card_in_fan_card_in_collection" parentEdge="NORTH" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="475" x2="475" y1="819" y2="651"/>
-        <positionableLine lineRole="CHILD_LINE" x1="249" x2="471" y1="647" y2="647"/>
+        <positionableLine lineRole="PARENT_LINE" x1="474" x2="474" y1="805" y2="651"/>
+        <positionableLine lineRole="CHILD_LINE" x1="249" x2="470" y1="647" y2="647"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="cg_schema.card_in_grid.fk_card_in_grid_card_in_collection" parentEdge="WEST" positioner="ThreeLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="443" x2="350" y1="893" y2="893"/>
+        <positionableLine lineRole="PARENT_LINE" x1="442" x2="350" y1="879" y2="879"/>
         <positionableLine lineRole="CHILD_LINE" x1="297" x2="342" y1="934" y2="934"/>
-        <positionableLine lineRole="MIDDLE_LINE" x1="346" x2="346" y1="930" y2="897"/>
+        <positionableLine lineRole="MIDDLE_LINE" x1="346" x2="346" y1="930" y2="883"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="cg_schema.card_in_grid.fk_card_in_grid_grid_direction_type" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
@@ -981,16 +985,15 @@ join card_definition c_d on dc_d.card_definition_id = c_d.id
     <FkGl bkCl="ff000000" childEdge="" nm="cg_schema.card_in_grid.fk_grid_relationship" parentEdge="" positioner="">
       <positionableLines/>
     </FkGl>
-    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="cg_schema.card_in_pile.fk_card_in_pile_card_in_collection" parentEdge="WEST" positioner="TwoLineUserLinkPositioner">
+    <FkGl bkCl="ff000000" childEdge="EAST" nm="cg_schema.card_in_pile.fk_card_in_pile_card_in_collection" parentEdge="WEST" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="443" x2="251" y1="873" y2="873"/>
-        <positionableLine lineRole="CHILD_LINE" x1="247" x2="247" y1="864" y2="869"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="442" x2="252" y1="855" y2="855"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="cg_schema.card_in_tabletop.fk_card_in_tabletop_card_in_collection" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="475" x2="475" y1="911" y2="1061"/>
-        <positionableLine lineRole="CHILD_LINE" x1="273" x2="471" y1="1065" y2="1065"/>
+        <positionableLine lineRole="PARENT_LINE" x1="474" x2="474" y1="910" y2="1061"/>
+        <positionableLine lineRole="CHILD_LINE" x1="273" x2="470" y1="1065" y2="1065"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="SOUTH" nm="cg_schema.collection.fk_collection_collection" parentEdge="NORTH" positioner="OneLineUserLinkPositioner">
@@ -1177,7 +1180,6 @@ join card_definition c_d on dc_d.card_definition_id = c_d.id
   </DbDocOptionMgr>
   <OpenEditors>
     <OpenEditor ClsNm="Diagram" fqn="null.card_game_instances" selected="1"/>
-    <OpenEditor ClsNm="View" fqn="cg_schema.create_cards_vw" selected="0"/>
     <OpenEditor ClsNm="Diagram" fqn="null.card_game_definitions" selected="0"/>
   </OpenEditors>
   <TreePaths>

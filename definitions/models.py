@@ -373,7 +373,7 @@ class DeckDefinitionM2MCardDefinition(models.Model):
     ordinal = models.IntegerField()
 
     def __unicode__(self):
-        return "{} {}: {}, {}, {}".format(self.__class__.__name__, self.id, self.deck_definition, self.card_definition, ordinal)
+        return "{} {}: {}, {}, {}".format(self.__class__.__name__, self.id, self.deck_definition, self.card_definition, self.ordinal)
 
     class Meta:
         managed = False
@@ -458,7 +458,6 @@ class VisibilityType(models.Model):
 class Card(models.Model):
     deck_definition_m2m_card_definition = models.ForeignKey('DeckDefinitionM2MCardDefinition', models.DO_NOTHING)
     deck = models.ForeignKey('Deck', models.DO_NOTHING)
-    card_in_collection = models.ForeignKey('CardInCollection', models.DO_NOTHING, blank=True, null=True)
 
     def __unicode__(self):
         return "{} {}: {}, {}".format(self.__class__.__name__, self.id, self.deck,
@@ -486,9 +485,10 @@ class CardInCollection(models.Model):
     visible_to_others = models.BooleanField()
     visible_to_player = models.BooleanField()
     orientation_type = models.ForeignKey('OrientationType', models.DO_NOTHING, blank=True, null=True)
+    card = models.ForeignKey(Card, models.DO_NOTHING, unique=True)
 
     def __unicode__(self):
-        return "{} {}: {}".format(self.__class__.__name__, self.id, self.collection)
+        return "{} {}: {} in {}".format(self.__class__.__name__, self.id, self.card, self.collection)
 
     class Meta:
         managed = False
