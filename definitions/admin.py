@@ -3,7 +3,7 @@ from django.contrib import admin
 # Register your models here.
 
 from django.contrib import admin
-
+from django.core import urlresolvers
 from .models import *
 
 admin.site.register(AuthGroup)
@@ -45,3 +45,14 @@ admin.site.register(OrientationType)
 admin.site.register(Player)
 admin.site.register(PlayerM2MGameSession)
 admin.site.register(VisibilityType)
+
+
+class AAdmin(admin.ModelAdmin):
+    list_display = ["field1", "link_to_B"]
+
+    def link_to_B(self, obj):
+        link = urlresolvers.reverse("admin:definitions", args=[obj.B.id])
+        return u'<a href="%s">%s</a>' % (link, obj.B.name)
+
+    link_to_B.allow_tags = True
+    

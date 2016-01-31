@@ -9,6 +9,102 @@ from __future__ import unicode_literals
 
 from django.db import models
 
+'''
+To create a new decks full of cards for a new game session (the cards will not yet be in any collection:
+Substitute the following parameters:
+  :game_session_id the game session id to create new decks for
+
+insert into card (deck_definition_m2m_card_definition_id, deck_id)
+select deck_definition_m2m_card_definition_id, deck_id
+from create_cards_vw
+where d_game_session_id = :game_session_id;
+
+The hard work is done by a view, as follows:
+
+create_cards_vw:
+select
+  dc_d.id deck_definition_m2m_card_definition_id,
+  d.id deck_id,
+  d.id d_id, d.box_definition_m2m_deck_definition_id d_box_definition_m2m_deck_definition_id, d.game_session_id d_game_session_id,
+  bd_d.id bd_d_id, bd_d.deck_definition_id bd_d_box_definition_id, bd_d.deck_name bd_d_deck_name,
+  d_d.id d_d_id, d_d.name d_d_name,
+  dc_d.id dc_d_id, dc_d.deck_definition_id dc_d_deck_definition_id, dc_d.card_definition_id dc_d_card_definition_id, dc_d.ordinal dc_d_ordinal,
+  c_d.id c_d_id, c_d.name c_d_name
+from deck d
+join box_definition_m2m_deck_definition bd_d on d.box_definition_m2m_deck_definition_id = bd_d.id
+join deck_definition d_d on d_d.id = bd_d.deck_definition_id
+join deck_definition_m2m_card_definition dc_d on d_d.id = dc_d.deck_definition_id
+join card_definition c_d on dc_d.card_definition_id = c_d.id;
+
+'''
+
+
+'''
+
+To put all the cards in a specified deck into a collection. The third (z) clause must be modified to match the collection_type
+Substitute the following parameters:
+  :deck_id the deck that all the cards are in
+  :collection_id the collection to put the cards in
+  :visible_to_others
+  :visible_to_player
+  :orientation_type_id
+
+with
+x as (
+  select c.id card_id, nextval('card_in_collection_id_seq'::regclass) next_cc_id
+  from card c
+  where c.deck_id = :deck_id
+) ,
+y as (
+  insert into card_in_collection (id, collection_id, visible_to_others, visible_to_player, orientation_type_id)
+  select next_cc_id, :collection_id, :visible_to_others, :visible_to_player, :orientation_type_id from x
+) ,
+z as (
+  insert into card_in_pile (card_in_collection_id, ordinal)
+  select next_cc_id, 1 from x
+)
+update card
+set card_in_collection_id = x.next_cc_id
+from x
+where card.id = x.card_id
+;
+
+'''
+
+'''
+To put a specific card or set of cards into a collection (where it previously was not in a collection):
+The third (z) clause must be modified to match the collection_type.
+This is similar to putting all the cards in a deck into a collection, except the where clause of the x statement is different
+Substitute the following parameters:
+  :deck_id the deck that all the cards are in
+  :collection_id the collection to put the cards in
+  :visible_to_others
+  :visible_to_player
+  :orientation_type_id
+
+with
+x as (
+  select c.id card_id, nextval('card_in_collection_id_seq'::regclass) next_cc_id
+  from card c
+  where c.id = :card_id (or c.id = :card_id2, etc.)
+) ,
+y as (
+  insert into card_in_collection (id, collection_id, visible_to_others, visible_to_player, orientation_type_id)
+  select next_cc_id, :collection_id, :visible_to_others, :visible_to_player, :orientation_type_id from x
+) ,
+z as (
+  insert into card_in_pile (card_in_collection_id, ordinal)
+  select next_cc_id, 1 from x
+)
+update card
+set card_in_collection_id = x.next_cc_id
+from x
+where card.id = x.card_id
+;
+
+'''
+
+
 ##############################################
 # Django tables
 ##############################################
@@ -16,7 +112,7 @@ from django.db import models
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=80)
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}".format(self.__class__.__name__, self.id, self.name)
 
     class Meta:
@@ -28,7 +124,7 @@ class AuthGroupPermissions(models.Model):
     group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
     permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}={}".format(self.__class__.__name__, self.id, self.group, self.permission)
 
     class Meta:
@@ -42,7 +138,7 @@ class AuthPermission(models.Model):
     content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING)
     codename = models.CharField(max_length=100)
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}".format(self.__class__.__name__, self.id, self.name)
 
     class Meta:
@@ -63,7 +159,7 @@ class AuthUser(models.Model):
     is_active = models.BooleanField()
     date_joined = models.DateTimeField()
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}".format(self.__class__.__name__, self.id, self.username)
 
     class Meta:
@@ -75,7 +171,7 @@ class AuthUserGroups(models.Model):
     user = models.ForeignKey(AuthUser, models.DO_NOTHING)
     group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}, {}".format(self.__class__.__name__, self.id, self.user, self.group)
 
     class Meta:
@@ -88,7 +184,7 @@ class AuthUserUserPermissions(models.Model):
     user = models.ForeignKey(AuthUser, models.DO_NOTHING)
     permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}, {}".format(self.__class__.__name__, self.id, self.user, self.permission)
 
     class Meta:
@@ -126,7 +222,7 @@ class DjangoMigrations(models.Model):
     name = models.CharField(max_length=255)
     applied = models.DateTimeField()
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}".format(self.__class__.__name__, self.id, self.name)
 
     class Meta:
@@ -151,7 +247,7 @@ class DjangoSession(models.Model):
 class BoxDefinition(models.Model):
     name = models.CharField(max_length=255)
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}".format(self.__class__.__name__, self.id, self.name)
 
     class Meta:
@@ -164,7 +260,7 @@ class BoxDefinitionM2MDeckDefinition(models.Model):
     box_definition = models.ForeignKey(BoxDefinition, models.DO_NOTHING)
     deck_name = models.CharField(max_length=255)
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}, {}, {}".format(self.__class__.__name__, self.id, self.box_definition, self.deck_definition, self.deck_name)
 
     class Meta:
@@ -178,7 +274,7 @@ class CardDefinition(models.Model):
     back_face_definition = models.ForeignKey('FaceDefinition', models.DO_NOTHING, related_name='card_definition_back_face')
     name = models.CharField(max_length=255)
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}".format(self.__class__.__name__, self.id, self.name)
 
     class Meta:
@@ -191,7 +287,7 @@ class CardDefinitionAttribute(models.Model):
     value = models.CharField(max_length=255, blank=True, null=True)
     card_definition = models.ForeignKey(CardDefinition, models.DO_NOTHING)
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}, {}={}".format(self.__class__.__name__, self.id, self.card_definition, self.card_definition_attribute_definition, self.value)
 
     class Meta:
@@ -203,7 +299,7 @@ class CardDefinitionAttributeDefinition(models.Model):
     name = models.CharField(max_length=255)
     card_type = models.ForeignKey('CardType', models.DO_NOTHING)
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}".format(self.__class__.__name__, self.id, self.card_type, self.name)
 
     class Meta:
@@ -214,7 +310,7 @@ class CardDefinitionAttributeDefinition(models.Model):
 class CardType(models.Model):
     name = models.CharField(unique=True, max_length=255)
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}".format(self.__class__.__name__, self.id, self.name)
 
     class Meta:
@@ -227,7 +323,7 @@ class CollectionDefinition(models.Model):
     name = models.CharField(max_length=255)
     collection_type = models.ForeignKey('CollectionType', models.DO_NOTHING)
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}".format(self.__class__.__name__, self.id, self.name)
 
     class Meta:
@@ -240,7 +336,7 @@ class CollectionDefinitionParentChild(models.Model):
     parent_collection_definition = models.ForeignKey(CollectionDefinition, models.DO_NOTHING, related_name='collection_definition_parent')
     name = models.CharField(max_length=255, blank=True, null=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}".format(self.__class__.__name__, self.id, self.name)
 
     class Meta:
@@ -252,7 +348,7 @@ class CollectionDefinitionParentChild(models.Model):
 class CollectionType(models.Model):
     name = models.CharField(unique=True, max_length=255, blank=True, null=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}".format(self.__class__.__name__, self.id, self.name)
 
     class Meta:
@@ -263,7 +359,7 @@ class CollectionType(models.Model):
 class DeckDefinition(models.Model):
     name = models.CharField(unique=True, max_length=255)
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}".format(self.__class__.__name__, self.id, self.name)
 
     class Meta:
@@ -276,7 +372,7 @@ class DeckDefinitionM2MCardDefinition(models.Model):
     card_definition = models.ForeignKey(CardDefinition, models.DO_NOTHING)
     ordinal = models.IntegerField()
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}, {}, {}".format(self.__class__.__name__, self.id, self.deck_definition, self.card_definition, ordinal)
 
     class Meta:
@@ -290,7 +386,7 @@ class FaceDefinition(models.Model):
     large_image = models.CharField(max_length=255, blank=True, null=True)
     small_image = models.CharField(max_length=255, blank=True, null=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}, {}".format(self.__class__.__name__, self.id, self.text_display, self.small_image)
 
     class Meta:
@@ -303,7 +399,7 @@ class GameDefinition(models.Model):
     initial_collection_definition = models.ForeignKey(CollectionDefinition, models.DO_NOTHING)
     name = models.CharField(max_length=255)
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}".format(self.__class__.__name__, self.id, self.name)
 
     class Meta:
@@ -314,7 +410,7 @@ class GameDefinition(models.Model):
 class GridDirectionType(models.Model):
     label = models.CharField(max_length=255)
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}".format(self.__class__.__name__, self.id, self.label)
 
     class Meta:
@@ -325,7 +421,7 @@ class GridDirectionType(models.Model):
 class GridProximityType(models.Model):
     label = models.CharField(max_length=255)
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}".format(self.__class__.__name__, self.id, self.label)
 
     class Meta:
@@ -336,7 +432,7 @@ class GridProximityType(models.Model):
 class OrientationType(models.Model):
     label = models.CharField(max_length=255)
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}".format(self.__class__.__name__, self.id, self.label)
 
     class Meta:
@@ -347,7 +443,7 @@ class OrientationType(models.Model):
 class VisibilityType(models.Model):
     visibility = models.CharField(max_length=255, blank=True, null=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}".format(self.__class__.__name__, self.id, self.visibility)
 
     class Meta:
@@ -362,9 +458,9 @@ class VisibilityType(models.Model):
 class Card(models.Model):
     deck_definition_m2m_card_definition = models.ForeignKey('DeckDefinitionM2MCardDefinition', models.DO_NOTHING)
     deck = models.ForeignKey('Deck', models.DO_NOTHING)
-    card_in_collection = models.ForeignKey('CardInCollection', models.DO_NOTHING)
+    card_in_collection = models.ForeignKey('CardInCollection', models.DO_NOTHING, blank=True, null=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}, {}".format(self.__class__.__name__, self.id, self.deck,
                                       self.deck_definition_m2m_card_definition)
 
@@ -375,9 +471,9 @@ class Card(models.Model):
 
 class CardInArray(models.Model):
     card_in_collection = models.ForeignKey('CardInCollection', models.DO_NOTHING, primary_key=True)
-    order = models.IntegerField()
+    ordinal = models.IntegerField()
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}".format(self.__class__.__name__, self.id, self.card_in_collection)
 
     class Meta:
@@ -391,7 +487,7 @@ class CardInCollection(models.Model):
     visible_to_player = models.BooleanField()
     orientation_type = models.ForeignKey('OrientationType', models.DO_NOTHING, blank=True, null=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}".format(self.__class__.__name__, self.id, self.collection)
 
     class Meta:
@@ -401,9 +497,9 @@ class CardInCollection(models.Model):
 
 class CardInFan(models.Model):
     card_in_collection = models.ForeignKey(CardInCollection, models.DO_NOTHING, primary_key=True)
-    order = models.IntegerField()
+    ordinal = models.IntegerField()
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}".format(self.__class__.__name__, self.id, self.card_in_collection)
 
     class Meta:
@@ -417,7 +513,7 @@ class CardInGrid(models.Model):
     grid_direction_type = models.ForeignKey('GridDirectionType', models.DO_NOTHING, blank=True, null=True)
     grid_proximity_type = models.ForeignKey('GridProximityType', models.DO_NOTHING, blank=True, null=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}".format(self.__class__.__name__, self.id, self.card_in_collection)
 
     class Meta:
@@ -427,9 +523,9 @@ class CardInGrid(models.Model):
 
 class CardInPile(models.Model):
     card_in_collection = models.ForeignKey(CardInCollection, models.DO_NOTHING, primary_key=True)
-    order = models.IntegerField()
+    ordinal = models.IntegerField()
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}".format(self.__class__.__name__, self.id, self.card_in_collection)
 
     class Meta:
@@ -443,7 +539,7 @@ class CardInTabletop(models.Model):
     y = models.FloatField()
     x = models.FloatField()
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}".format(self.__class__.__name__, self.id, self.card_in_collection)
 
     class Meta:
@@ -456,10 +552,11 @@ class Collection(models.Model):
     parent_collection = models.ForeignKey('self', models.DO_NOTHING, blank=True, null=True)
     name = models.CharField(max_length=255, blank=True, null=True)
     player_m2m_game_session = models.ForeignKey('PlayerM2MGameSession', models.DO_NOTHING, blank=True, null=True)
+    game_session = models.ForeignKey('GameSession', models.DO_NOTHING)
 
-    def __str__(self):
-        return "{} {}: {}, {}, {}, {}".format(self.__class__.__name__, self.id, self.parent_collection,
-                                              self.collection_definition, self.player_m2m_game_session, self.name)
+    def __unicode__(self):
+        return "{} {}: {}, {}, {}".format(self.__class__.__name__, self.id, self.name, 
+                                              self.collection_definition, self.game_session)
 
     class Meta:
         managed = False
@@ -486,7 +583,7 @@ class GameSession(models.Model):
 class Player(models.Model):
     user_name = models.CharField(unique=True, max_length=255)
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} {}: {}".format(self.__class__.__name__, self.id, self.name)
 
     class Meta:

@@ -1,5 +1,7 @@
 from django.http import HttpResponse
+import locale
 
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the definitions index.")
+    locales = "Current locale: %s %s -- Default locale: %s %s" % (locale.getlocale() + locale.getdefaultlocale())
+    return HttpResponse("locales: " + locales)
