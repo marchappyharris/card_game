@@ -791,15 +791,15 @@ join card_definition c_d on dc_d.card_definition_id = c_d.id
       <DbTableRectangleFill>HeaderFooterFill</DbTableRectangleFill>
       <svg path=""/>
     </DiaProps>
-    <TbGl bkCl="ff6666ff" sch="cg_schema" tbl="card_definition" x="261" y="920"/>
-    <TbGl bkCl="ff6666ff" sch="cg_schema" tbl="card_definition_attribute" x="120" y="574"/>
-    <TbGl bkCl="ff6666ff" sch="cg_schema" tbl="card_definition_attribute_definition" x="49" y="798"/>
+    <TbGl bkCl="ff6666ff" sch="cg_schema" tbl="card_definition" x="87" y="616"/>
+    <TbGl bkCl="ff6666ff" sch="cg_schema" tbl="card_definition_attribute" x="587" y="718"/>
+    <TbGl bkCl="ff6666ff" sch="cg_schema" tbl="card_definition_attribute_definition" x="604" y="864"/>
     <TbGl bkCl="ff6666ff" sch="cg_schema" tbl="deck_definition" x="216" y="479"/>
     <TbGl bkCl="ff6666ff" sch="cg_schema" tbl="deck_definition_m2m_card_definition" x="611" y="594"/>
-    <TbGl bkCl="ff6666ff" sch="cg_schema" tbl="face_definition" x="286" y="1066"/>
+    <TbGl bkCl="ff6666ff" sch="cg_schema" tbl="face_definition" x="110" y="798"/>
     <TbGl bkCl="ff6666ff" sch="cg_schema" tbl="box_definition" x="300" y="332"/>
     <TbGl bkCl="ff6666ff" sch="cg_schema" tbl="box_definition_m2m_deck_definition" x="604" y="442"/>
-    <TbGl bkCl="ff6666ff" sch="cg_schema" tbl="card_type" x="709" y="714"/>
+    <TbGl bkCl="ff6666ff" sch="cg_schema" tbl="card_type" x="616" y="1003"/>
     <TbGl bkCl="ff6666ff" sch="cg_schema" tbl="collection_definition" x="999" y="427"/>
     <TbGl bkCl="ff6666ff" sch="cg_schema" tbl="collection_type" x="1011" y="570"/>
     <TbGl bkCl="ff6666ff" sch="cg_schema" tbl="game_definition" x="327" y="192"/>
@@ -817,29 +817,28 @@ join card_definition c_d on dc_d.card_definition_id = c_d.id
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="SOUTH" nm="cg_schema.card_definition.fk_card_definition_back" parentEdge="NORTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="328" x2="328" y1="1066" y2="999"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="152" x2="152" y1="798" y2="695"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="SOUTH" nm="cg_schema.card_definition.fk_card_definition_front" parentEdge="NORTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="477" x2="477" y1="1066" y2="999"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="308" x2="308" y1="798" y2="695"/>
       </positionableLines>
     </FkGl>
-    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="cg_schema.card_definition_attribute.fk_card_definition_attribute_card_definition" parentEdge="NORTH" positioner="OneLineUserLinkPositioner">
+    <FkGl bkCl="ff000000" childEdge="NORTH" nm="cg_schema.card_definition_attribute.fk_card_definition_attribute_card_definition" parentEdge="EAST" positioner="TwoLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="392" x2="392" y1="920" y2="653"/>
+        <positionableLine lineRole="PARENT_LINE" x1="443" x2="588" y1="678" y2="678"/>
+        <positionableLine lineRole="CHILD_LINE" x1="592" x2="592" y1="718" y2="682"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="SOUTH" nm="cg_schema.card_definition_attribute.fk_card_definition_attribute_card_definition_attribute_definiti" parentEdge="NORTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="181" x2="181" y1="798" y2="653"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="895" x2="895" y1="864" y2="797"/>
       </positionableLines>
     </FkGl>
-    <FkGl bkCl="ff000000" childEdge="EAST" nm="cg_schema.card_definition_attribute_definition.fk_card_definition_attribute_definition_card_type" parentEdge="WEST" positioner="ThreeLineUserLinkPositioner">
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="cg_schema.card_definition_attribute_definition.fk_card_definition_attribute_definition_card_type" parentEdge="NORTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="PARENT_LINE" x1="709" x2="546" y1="719" y2="719"/>
-        <positionableLine lineRole="CHILD_LINE" x1="345" x2="538" y1="859" y2="859"/>
-        <positionableLine lineRole="MIDDLE_LINE" x1="542" x2="542" y1="855" y2="723"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="672" x2="672" y1="1003" y2="930"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="SOUTH" nm="cg_schema.collection_definition.fk_collection_definition_collection_type" parentEdge="NORTH" positioner="OneLineUserLinkPositioner">
@@ -857,9 +856,9 @@ join card_definition c_d on dc_d.card_definition_id = c_d.id
         <positionableLine lineRole="SINGLE_LINE" x1="1193" x2="1193" y1="427" y2="335"/>
       </positionableLines>
     </FkGl>
-    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="cg_schema.deck_definition_m2m_card_definition.fk_deck_definition_M2M_card_definition_card_definition" parentEdge="NORTH" positioner="OneLineUserLinkPositioner">
+    <FkGl bkCl="ff000000" childEdge="WEST" nm="cg_schema.deck_definition_m2m_card_definition.fk_deck_definition_M2M_card_definition_card_definition" parentEdge="EAST" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="612" x2="612" y1="920" y2="673"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="443" x2="611" y1="621" y2="621"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="WEST" nm="cg_schema.deck_definition_m2m_card_definition.fk_deck_definition_M2M_card_definition_deck_definition" parentEdge="EAST" positioner="ThreeLineUserLinkPositioner">
@@ -1179,8 +1178,8 @@ join card_definition c_d on dc_d.card_definition_id = c_d.id
     </BasicOptionMgr>
   </DbDocOptionMgr>
   <OpenEditors>
-    <OpenEditor ClsNm="Diagram" fqn="null.card_game_instances" selected="1"/>
-    <OpenEditor ClsNm="Diagram" fqn="null.card_game_definitions" selected="0"/>
+    <OpenEditor ClsNm="Diagram" fqn="null.card_game_instances" selected="0"/>
+    <OpenEditor ClsNm="Diagram" fqn="null.card_game_definitions" selected="1"/>
   </OpenEditors>
   <TreePaths>
     <TreePath/>

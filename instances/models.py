@@ -7,7 +7,6 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from __future__ import unicode_literals
 
-from django.db import models
 from definitions.models import *
 
 '''
@@ -26,10 +25,12 @@ create_cards_vw:
 select
   dc_d.id deck_definition_m2m_card_definition_id,
   d.id deck_id,
-  d.id d_id, d.box_definition_m2m_deck_definition_id d_box_definition_m2m_deck_definition_id, d.game_session_id d_game_session_id,
+  d.id d_id, d.box_definition_m2m_deck_definition_id d_box_definition_m2m_deck_definition_id,
+   d.game_session_id d_game_session_id,
   bd_d.id bd_d_id, bd_d.deck_definition_id bd_d_box_definition_id, bd_d.deck_name bd_d_deck_name,
   d_d.id d_d_id, d_d.name d_d_name,
-  dc_d.id dc_d_id, dc_d.deck_definition_id dc_d_deck_definition_id, dc_d.card_definition_id dc_d_card_definition_id, dc_d.ordinal dc_d_ordinal,
+  dc_d.id dc_d_id, dc_d.deck_definition_id dc_d_deck_definition_id,
+   dc_d.card_definition_id dc_d_card_definition_id, dc_d.ordinal dc_d_ordinal,
   c_d.id c_d_id, c_d.name c_d_name
 from deck d
 join box_definition_m2m_deck_definition bd_d on d.box_definition_m2m_deck_definition_id = bd_d.id
@@ -42,7 +43,8 @@ join card_definition c_d on dc_d.card_definition_id = c_d.id;
 
 '''
 
-To put all the cards in a specified deck into a collection. The third (z) clause must be modified to match the collection_type
+To put all the cards in a specified deck into a collection.
+The third (z) clause must be modified to match the collection_type
 Substitute the following parameters:
   :deck_id the deck that all the cards are in
   :collection_id the collection to put the cards in
@@ -75,7 +77,8 @@ where card.id = x.card_id
 '''
 To put a specific card or set of cards into a collection (where it previously was not in a collection):
 The third (z) clause must be modified to match the collection_type.
-This is similar to putting all the cards in a deck into a collection, except the where clause of the x statement is different
+This is similar to putting all the cards in a deck into a collection,
+ except the where clause of the x statement is different
 Substitute the following parameters:
   :deck_id the deck that all the cards are in
   :collection_id the collection to put the cards in
@@ -246,7 +249,8 @@ class DjangoSession(models.Model):
 ##################################
 
 class Card(models.Model):
-    deck_definition_m2m_card_definition = models.ForeignKey('definitions.DeckDefinitionM2MCardDefinition', models.DO_NOTHING)
+    deck_definition_m2m_card_definition = models.ForeignKey('definitions.DeckDefinitionM2MCardDefinition',
+                                                            models.DO_NOTHING)
     deck = models.ForeignKey('Deck', models.DO_NOTHING)
 
     def __unicode__(self):

@@ -34,6 +34,222 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 SET search_path = cg_schema, pg_catalog;
 
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: auth_group; Type: TABLE; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+CREATE TABLE auth_group (
+    id integer NOT NULL,
+    name character varying(80) NOT NULL
+);
+
+
+ALTER TABLE auth_group OWNER TO mharris;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: cg_schema; Owner: mharris
+--
+
+CREATE SEQUENCE auth_group_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE auth_group_id_seq OWNER TO mharris;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: cg_schema; Owner: mharris
+--
+
+ALTER SEQUENCE auth_group_id_seq OWNED BY auth_group.id;
+
+
+--
+-- Name: auth_group_permissions; Type: TABLE; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+CREATE TABLE auth_group_permissions (
+    id integer NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE auth_group_permissions OWNER TO mharris;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: cg_schema; Owner: mharris
+--
+
+CREATE SEQUENCE auth_group_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE auth_group_permissions_id_seq OWNER TO mharris;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: cg_schema; Owner: mharris
+--
+
+ALTER SEQUENCE auth_group_permissions_id_seq OWNED BY auth_group_permissions.id;
+
+
+--
+-- Name: auth_permission; Type: TABLE; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+CREATE TABLE auth_permission (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE auth_permission OWNER TO mharris;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: cg_schema; Owner: mharris
+--
+
+CREATE SEQUENCE auth_permission_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE auth_permission_id_seq OWNER TO mharris;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: cg_schema; Owner: mharris
+--
+
+ALTER SEQUENCE auth_permission_id_seq OWNED BY auth_permission.id;
+
+
+--
+-- Name: auth_user; Type: TABLE; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+CREATE TABLE auth_user (
+    id integer NOT NULL,
+    password character varying(128) NOT NULL,
+    last_login timestamp with time zone,
+    is_superuser boolean NOT NULL,
+    username character varying(30) NOT NULL,
+    first_name character varying(30) NOT NULL,
+    last_name character varying(30) NOT NULL,
+    email character varying(254) NOT NULL,
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL,
+    date_joined timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE auth_user OWNER TO mharris;
+
+--
+-- Name: auth_user_groups; Type: TABLE; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+CREATE TABLE auth_user_groups (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE auth_user_groups OWNER TO mharris;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE; Schema: cg_schema; Owner: mharris
+--
+
+CREATE SEQUENCE auth_user_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE auth_user_groups_id_seq OWNER TO mharris;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: cg_schema; Owner: mharris
+--
+
+ALTER SEQUENCE auth_user_groups_id_seq OWNED BY auth_user_groups.id;
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE; Schema: cg_schema; Owner: mharris
+--
+
+CREATE SEQUENCE auth_user_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE auth_user_id_seq OWNER TO mharris;
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE OWNED BY; Schema: cg_schema; Owner: mharris
+--
+
+ALTER SEQUENCE auth_user_id_seq OWNED BY auth_user.id;
+
+
+--
+-- Name: auth_user_user_permissions; Type: TABLE; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+CREATE TABLE auth_user_user_permissions (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE auth_user_user_permissions OWNER TO mharris;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE; Schema: cg_schema; Owner: mharris
+--
+
+CREATE SEQUENCE auth_user_user_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE auth_user_user_permissions_id_seq OWNER TO mharris;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: cg_schema; Owner: mharris
+--
+
+ALTER SEQUENCE auth_user_user_permissions_id_seq OWNED BY auth_user_user_permissions.id;
+
+
 --
 -- Name: box_definition_id_seq; Type: SEQUENCE; Schema: cg_schema; Owner: mharris
 --
@@ -48,17 +264,13 @@ CREATE SEQUENCE box_definition_id_seq
 
 ALTER TABLE box_definition_id_seq OWNER TO mharris;
 
-SET default_tablespace = '';
-
-SET default_with_oids = false;
-
 --
 -- Name: box_definition; Type: TABLE; Schema: cg_schema; Owner: mharris; Tablespace: 
 --
 
 CREATE TABLE box_definition (
     id integer DEFAULT nextval('box_definition_id_seq'::regclass) NOT NULL,
-    name character varying NOT NULL
+    name character varying(255) NOT NULL
 );
 
 
@@ -93,7 +305,7 @@ CREATE TABLE box_definition_m2m_deck_definition (
     id integer DEFAULT nextval('"box_definition_M2M_deck_definition_id_seq"'::regclass) NOT NULL,
     deck_definition_id integer NOT NULL,
     box_definition_id integer NOT NULL,
-    deck_name character varying NOT NULL
+    deck_name character varying(255) NOT NULL
 );
 
 
@@ -127,8 +339,7 @@ COMMENT ON SEQUENCE card_id_seq IS 'DbWrench Autogenerated Sequence.';
 CREATE TABLE card (
     id integer DEFAULT nextval('card_id_seq'::regclass) NOT NULL,
     deck_definition_m2m_card_definition_id integer NOT NULL,
-    deck_id integer NOT NULL,
-    card_in_collection_id integer NOT NULL
+    deck_id integer NOT NULL
 );
 
 
@@ -163,7 +374,7 @@ CREATE TABLE card_definition (
     id integer DEFAULT nextval('card_definition_id_seq'::regclass) NOT NULL,
     front_face_definition_id integer NOT NULL,
     back_face_definition_id integer NOT NULL,
-    name character varying NOT NULL
+    name character varying(255) NOT NULL
 );
 
 
@@ -196,7 +407,7 @@ COMMENT ON SEQUENCE card_definition_attribute_id_seq IS 'DbWrench Autogenerated 
 
 CREATE TABLE card_definition_attribute (
     card_definition_attribute_definition_id integer NOT NULL,
-    value character varying,
+    value character varying(255),
     card_definition_id integer NOT NULL,
     id integer DEFAULT nextval('card_definition_attribute_id_seq'::regclass) NOT NULL
 );
@@ -231,7 +442,7 @@ COMMENT ON SEQUENCE card_definition_attribute_definition_id_seq IS 'DbWrench Aut
 
 CREATE TABLE card_definition_attribute_definition (
     id integer DEFAULT nextval('card_definition_attribute_definition_id_seq'::regclass) NOT NULL,
-    name character varying NOT NULL,
+    name character varying(255) NOT NULL,
     card_type_id integer NOT NULL
 );
 
@@ -244,7 +455,7 @@ ALTER TABLE card_definition_attribute_definition OWNER TO mharris;
 
 CREATE TABLE card_in_array (
     card_in_collection_id integer NOT NULL,
-    "order" integer NOT NULL
+    ordinal integer NOT NULL
 );
 
 
@@ -280,7 +491,8 @@ CREATE TABLE card_in_collection (
     collection_id integer NOT NULL,
     visible_to_others boolean NOT NULL,
     visible_to_player boolean NOT NULL,
-    orientation_type_id integer
+    orientation_type_id integer,
+    card_id integer NOT NULL
 );
 
 
@@ -292,7 +504,7 @@ ALTER TABLE card_in_collection OWNER TO mharris;
 
 CREATE TABLE card_in_fan (
     card_in_collection_id integer NOT NULL,
-    "order" integer NOT NULL
+    ordinal integer NOT NULL
 );
 
 
@@ -318,7 +530,7 @@ ALTER TABLE card_in_grid OWNER TO mharris;
 
 CREATE TABLE card_in_pile (
     card_in_collection_id integer NOT NULL,
-    "order" integer NOT NULL
+    ordinal integer NOT NULL
 );
 
 
@@ -365,7 +577,7 @@ COMMENT ON SEQUENCE card_type_id_seq IS 'DbWrench Autogenerated Sequence.';
 
 CREATE TABLE card_type (
     id integer DEFAULT nextval('card_type_id_seq'::regclass) NOT NULL,
-    name character varying NOT NULL
+    name character varying(255) NOT NULL
 );
 
 
@@ -400,8 +612,9 @@ CREATE TABLE collection (
     id integer DEFAULT nextval('collection_id_seq'::regclass) NOT NULL,
     collection_definition_id integer NOT NULL,
     parent_collection_id integer,
-    name character varying,
-    player_m2m_game_session_id integer
+    name character varying(255),
+    player_m2m_game_session_id integer,
+    game_session_id integer NOT NULL
 );
 
 
@@ -435,7 +648,7 @@ COMMENT ON SEQUENCE collection_definition_id_seq IS 'DbWrench Autogenerated Sequ
 CREATE TABLE collection_definition (
     id integer DEFAULT nextval('collection_definition_id_seq'::regclass) NOT NULL,
     per_player boolean NOT NULL,
-    name character varying NOT NULL,
+    name character varying(255) NOT NULL,
     collection_type_id integer NOT NULL
 );
 
@@ -471,7 +684,7 @@ CREATE TABLE collection_definition_parent_child (
     id integer DEFAULT nextval('collection_definition_parent_child_id_seq'::regclass) NOT NULL,
     child_collection_definition_id integer NOT NULL,
     parent_collection_definition_id integer NOT NULL,
-    name character varying
+    name character varying(255)
 );
 
 
@@ -504,7 +717,7 @@ COMMENT ON SEQUENCE collection_type_id_seq IS 'DbWrench Autogenerated Sequence.'
 
 CREATE TABLE collection_type (
     id integer DEFAULT nextval('collection_type_id_seq'::regclass) NOT NULL,
-    name character varying
+    name character varying(255)
 );
 
 
@@ -571,7 +784,7 @@ COMMENT ON SEQUENCE deck_definition_id_seq IS 'DbWrench Autogenerated Sequence.'
 
 CREATE TABLE deck_definition (
     id integer DEFAULT nextval('deck_definition_id_seq'::regclass) NOT NULL,
-    name character varying NOT NULL
+    name character varying(255) NOT NULL
 );
 
 
@@ -613,6 +826,158 @@ CREATE TABLE deck_definition_m2m_card_definition (
 ALTER TABLE deck_definition_m2m_card_definition OWNER TO mharris;
 
 --
+-- Name: create_cards_vw; Type: VIEW; Schema: cg_schema; Owner: mharris
+--
+
+CREATE VIEW create_cards_vw AS
+ SELECT dc_d.id AS deck_definition_m2m_card_definition_id,
+    d.id AS deck_id,
+    d.id AS d_id,
+    d.box_definition_m2m_deck_definition_id AS d_box_definition_m2m_deck_definition_id,
+    d.game_session_id AS d_game_session_id,
+    bd_d.id AS bd_d_id,
+    bd_d.deck_definition_id AS bd_d_box_definition_id,
+    bd_d.deck_name AS bd_d_deck_name,
+    d_d.id AS d_d_id,
+    d_d.name AS d_d_name,
+    dc_d.id AS dc_d_id,
+    dc_d.deck_definition_id AS dc_d_deck_definition_id,
+    dc_d.card_definition_id AS dc_d_card_definition_id,
+    dc_d.ordinal AS dc_d_ordinal,
+    c_d.id AS c_d_id,
+    c_d.name AS c_d_name
+   FROM ((((deck d
+     JOIN box_definition_m2m_deck_definition bd_d ON ((d.box_definition_m2m_deck_definition_id = bd_d.id)))
+     JOIN deck_definition d_d ON ((d_d.id = bd_d.deck_definition_id)))
+     JOIN deck_definition_m2m_card_definition dc_d ON ((d_d.id = dc_d.deck_definition_id)))
+     JOIN card_definition c_d ON ((dc_d.card_definition_id = c_d.id)));
+
+
+ALTER TABLE create_cards_vw OWNER TO mharris;
+
+--
+-- Name: django_admin_log; Type: TABLE; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+CREATE TABLE django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    content_type_id integer,
+    user_id integer NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE django_admin_log OWNER TO mharris;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: cg_schema; Owner: mharris
+--
+
+CREATE SEQUENCE django_admin_log_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE django_admin_log_id_seq OWNER TO mharris;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: cg_schema; Owner: mharris
+--
+
+ALTER SEQUENCE django_admin_log_id_seq OWNED BY django_admin_log.id;
+
+
+--
+-- Name: django_content_type; Type: TABLE; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+CREATE TABLE django_content_type (
+    id integer NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE django_content_type OWNER TO mharris;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: cg_schema; Owner: mharris
+--
+
+CREATE SEQUENCE django_content_type_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE django_content_type_id_seq OWNER TO mharris;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: cg_schema; Owner: mharris
+--
+
+ALTER SEQUENCE django_content_type_id_seq OWNED BY django_content_type.id;
+
+
+--
+-- Name: django_migrations; Type: TABLE; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+CREATE TABLE django_migrations (
+    id integer NOT NULL,
+    app character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    applied timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE django_migrations OWNER TO mharris;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: cg_schema; Owner: mharris
+--
+
+CREATE SEQUENCE django_migrations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE django_migrations_id_seq OWNER TO mharris;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: cg_schema; Owner: mharris
+--
+
+ALTER SEQUENCE django_migrations_id_seq OWNED BY django_migrations.id;
+
+
+--
+-- Name: django_session; Type: TABLE; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+CREATE TABLE django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE django_session OWNER TO mharris;
+
+--
 -- Name: face_definition_id_seq; Type: SEQUENCE; Schema: cg_schema; Owner: mharris
 --
 
@@ -639,9 +1004,9 @@ COMMENT ON SEQUENCE face_definition_id_seq IS 'DbWrench Autogenerated Sequence.'
 
 CREATE TABLE face_definition (
     id integer DEFAULT nextval('face_definition_id_seq'::regclass) NOT NULL,
-    text_display character varying NOT NULL,
-    large_image character varying,
-    small_image character varying
+    text_display character varying(255) NOT NULL,
+    large_image character varying(255),
+    small_image character varying(255)
 );
 
 
@@ -676,7 +1041,7 @@ CREATE TABLE game_definition (
     id integer DEFAULT nextval('game_definition_id_seq'::regclass) NOT NULL,
     box_definition_id integer NOT NULL,
     initial_collection_definition_id integer NOT NULL,
-    name character varying NOT NULL
+    name character varying(255) NOT NULL
 );
 
 
@@ -735,7 +1100,7 @@ COMMENT ON SEQUENCE grid_direction_type_id_seq IS 'DbWrench Autogenerated Sequen
 
 CREATE TABLE grid_direction_type (
     id integer DEFAULT nextval('grid_direction_type_id_seq'::regclass) NOT NULL,
-    label character varying NOT NULL
+    label character varying(255) NOT NULL
 );
 
 
@@ -768,22 +1133,11 @@ COMMENT ON SEQUENCE grid_proximity_type_id_seq IS 'DbWrench Autogenerated Sequen
 
 CREATE TABLE grid_proximity_type (
     id integer DEFAULT nextval('grid_proximity_type_id_seq'::regclass) NOT NULL,
-    label character varying NOT NULL
+    label character varying(255) NOT NULL
 );
 
 
 ALTER TABLE grid_proximity_type OWNER TO mharris;
-
---
--- Name: initial_layout_definition_m2m_collection_definition; Type: TABLE; Schema: cg_schema; Owner: mharris; Tablespace: 
---
-
-CREATE TABLE initial_layout_definition_m2m_collection_definition (
-    "Id" integer NOT NULL
-);
-
-
-ALTER TABLE initial_layout_definition_m2m_collection_definition OWNER TO mharris;
 
 --
 -- Name: orientation_type_id_seq; Type: SEQUENCE; Schema: cg_schema; Owner: mharris
@@ -812,7 +1166,7 @@ COMMENT ON SEQUENCE orientation_type_id_seq IS 'DbWrench Autogenerated Sequence.
 
 CREATE TABLE orientation_type (
     id integer DEFAULT nextval('orientation_type_id_seq'::regclass) NOT NULL,
-    label character varying NOT NULL
+    label character varying(255) NOT NULL
 );
 
 
@@ -838,7 +1192,7 @@ ALTER TABLE player_id_seq OWNER TO mharris;
 
 CREATE TABLE player (
     id integer DEFAULT nextval('player_id_seq'::regclass) NOT NULL,
-    user_name character varying NOT NULL
+    user_name character varying(255) NOT NULL
 );
 
 
@@ -872,7 +1226,7 @@ COMMENT ON SEQUENCE "player_M2M_game_session_id_seq" IS 'DbWrench Autogenerated 
 CREATE TABLE player_m2m_game_session (
     id integer DEFAULT nextval('"player_M2M_game_session_id_seq"'::regclass) NOT NULL,
     player_id integer NOT NULL,
-    player_alias character varying,
+    player_alias character varying(255),
     game_session_id integer NOT NULL
 );
 
@@ -906,11 +1260,300 @@ COMMENT ON SEQUENCE visibility_type_id_seq IS 'DbWrench Autogenerated Sequence.'
 
 CREATE TABLE visibility_type (
     id integer DEFAULT nextval('visibility_type_id_seq'::regclass) NOT NULL,
-    visibility character varying
+    visibility character varying(255)
 );
 
 
 ALTER TABLE visibility_type OWNER TO mharris;
+
+--
+-- Name: id; Type: DEFAULT; Schema: cg_schema; Owner: mharris
+--
+
+ALTER TABLE ONLY auth_group ALTER COLUMN id SET DEFAULT nextval('auth_group_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: cg_schema; Owner: mharris
+--
+
+ALTER TABLE ONLY auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: cg_schema; Owner: mharris
+--
+
+ALTER TABLE ONLY auth_permission ALTER COLUMN id SET DEFAULT nextval('auth_permission_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: cg_schema; Owner: mharris
+--
+
+ALTER TABLE ONLY auth_user ALTER COLUMN id SET DEFAULT nextval('auth_user_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: cg_schema; Owner: mharris
+--
+
+ALTER TABLE ONLY auth_user_groups ALTER COLUMN id SET DEFAULT nextval('auth_user_groups_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: cg_schema; Owner: mharris
+--
+
+ALTER TABLE ONLY auth_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('auth_user_user_permissions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: cg_schema; Owner: mharris
+--
+
+ALTER TABLE ONLY django_admin_log ALTER COLUMN id SET DEFAULT nextval('django_admin_log_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: cg_schema; Owner: mharris
+--
+
+ALTER TABLE ONLY django_content_type ALTER COLUMN id SET DEFAULT nextval('django_content_type_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: cg_schema; Owner: mharris
+--
+
+ALTER TABLE ONLY django_migrations ALTER COLUMN id SET DEFAULT nextval('django_migrations_id_seq'::regclass);
+
+
+--
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: cg_schema; Owner: mharris
+--
+
+COPY auth_group (id, name) FROM stdin;
+\.
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: cg_schema; Owner: mharris
+--
+
+SELECT pg_catalog.setval('auth_group_id_seq', 1, false);
+
+
+--
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: cg_schema; Owner: mharris
+--
+
+COPY auth_group_permissions (id, group_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: cg_schema; Owner: mharris
+--
+
+SELECT pg_catalog.setval('auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: cg_schema; Owner: mharris
+--
+
+COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can add log entry	1	add_logentry
+2	Can change log entry	1	change_logentry
+3	Can delete log entry	1	delete_logentry
+4	Can add permission	2	add_permission
+5	Can change permission	2	change_permission
+6	Can delete permission	2	delete_permission
+7	Can add group	3	add_group
+8	Can change group	3	change_group
+9	Can delete group	3	delete_group
+10	Can add user	4	add_user
+11	Can change user	4	change_user
+12	Can delete user	4	delete_user
+13	Can add content type	5	add_contenttype
+14	Can change content type	5	change_contenttype
+15	Can delete content type	5	delete_contenttype
+16	Can add session	6	add_session
+17	Can change session	6	change_session
+18	Can delete session	6	delete_session
+19	Can add auth group	7	add_authgroup
+20	Can change auth group	7	change_authgroup
+21	Can delete auth group	7	delete_authgroup
+22	Can add auth group permissions	8	add_authgrouppermissions
+23	Can change auth group permissions	8	change_authgrouppermissions
+24	Can delete auth group permissions	8	delete_authgrouppermissions
+25	Can add auth permission	9	add_authpermission
+26	Can change auth permission	9	change_authpermission
+27	Can delete auth permission	9	delete_authpermission
+28	Can add auth user	10	add_authuser
+29	Can change auth user	10	change_authuser
+30	Can delete auth user	10	delete_authuser
+31	Can add auth user groups	11	add_authusergroups
+32	Can change auth user groups	11	change_authusergroups
+33	Can delete auth user groups	11	delete_authusergroups
+34	Can add auth user user permissions	12	add_authuseruserpermissions
+35	Can change auth user user permissions	12	change_authuseruserpermissions
+36	Can delete auth user user permissions	12	delete_authuseruserpermissions
+37	Can add box definition	13	add_boxdefinition
+38	Can change box definition	13	change_boxdefinition
+39	Can delete box definition	13	delete_boxdefinition
+40	Can add box definition m2m deck definition	14	add_boxdefinitionm2mdeckdefinition
+41	Can change box definition m2m deck definition	14	change_boxdefinitionm2mdeckdefinition
+42	Can delete box definition m2m deck definition	14	delete_boxdefinitionm2mdeckdefinition
+43	Can add card	15	add_card
+44	Can change card	15	change_card
+45	Can delete card	15	delete_card
+46	Can add card definition	16	add_carddefinition
+47	Can change card definition	16	change_carddefinition
+48	Can delete card definition	16	delete_carddefinition
+49	Can add card definition attribute	17	add_carddefinitionattribute
+50	Can change card definition attribute	17	change_carddefinitionattribute
+51	Can delete card definition attribute	17	delete_carddefinitionattribute
+52	Can add card definition attribute definition	18	add_carddefinitionattributedefinition
+53	Can change card definition attribute definition	18	change_carddefinitionattributedefinition
+54	Can delete card definition attribute definition	18	delete_carddefinitionattributedefinition
+55	Can add card in array	19	add_cardinarray
+56	Can change card in array	19	change_cardinarray
+57	Can delete card in array	19	delete_cardinarray
+58	Can add card in collection	20	add_cardincollection
+59	Can change card in collection	20	change_cardincollection
+60	Can delete card in collection	20	delete_cardincollection
+61	Can add card in fan	21	add_cardinfan
+62	Can change card in fan	21	change_cardinfan
+63	Can delete card in fan	21	delete_cardinfan
+64	Can add card in grid	22	add_cardingrid
+65	Can change card in grid	22	change_cardingrid
+66	Can delete card in grid	22	delete_cardingrid
+67	Can add card in pile	23	add_cardinpile
+68	Can change card in pile	23	change_cardinpile
+69	Can delete card in pile	23	delete_cardinpile
+70	Can add card in tabletop	24	add_cardintabletop
+71	Can change card in tabletop	24	change_cardintabletop
+72	Can delete card in tabletop	24	delete_cardintabletop
+73	Can add card type	25	add_cardtype
+74	Can change card type	25	change_cardtype
+75	Can delete card type	25	delete_cardtype
+76	Can add collection	26	add_collection
+77	Can change collection	26	change_collection
+78	Can delete collection	26	delete_collection
+79	Can add collection definition	27	add_collectiondefinition
+80	Can change collection definition	27	change_collectiondefinition
+81	Can delete collection definition	27	delete_collectiondefinition
+82	Can add collection definition parent child	28	add_collectiondefinitionparentchild
+83	Can change collection definition parent child	28	change_collectiondefinitionparentchild
+84	Can delete collection definition parent child	28	delete_collectiondefinitionparentchild
+85	Can add collection type	29	add_collectiontype
+86	Can change collection type	29	change_collectiontype
+87	Can delete collection type	29	delete_collectiontype
+88	Can add deck	30	add_deck
+89	Can change deck	30	change_deck
+90	Can delete deck	30	delete_deck
+91	Can add deck definition	31	add_deckdefinition
+92	Can change deck definition	31	change_deckdefinition
+93	Can delete deck definition	31	delete_deckdefinition
+94	Can add deck definition m2m card definition	32	add_deckdefinitionm2mcarddefinition
+95	Can change deck definition m2m card definition	32	change_deckdefinitionm2mcarddefinition
+96	Can delete deck definition m2m card definition	32	delete_deckdefinitionm2mcarddefinition
+97	Can add django admin log	33	add_djangoadminlog
+98	Can change django admin log	33	change_djangoadminlog
+99	Can delete django admin log	33	delete_djangoadminlog
+100	Can add django content type	34	add_djangocontenttype
+101	Can change django content type	34	change_djangocontenttype
+102	Can delete django content type	34	delete_djangocontenttype
+103	Can add django migrations	35	add_djangomigrations
+104	Can change django migrations	35	change_djangomigrations
+105	Can delete django migrations	35	delete_djangomigrations
+106	Can add django session	36	add_djangosession
+107	Can change django session	36	change_djangosession
+108	Can delete django session	36	delete_djangosession
+109	Can add face definition	37	add_facedefinition
+110	Can change face definition	37	change_facedefinition
+111	Can delete face definition	37	delete_facedefinition
+112	Can add game definition	38	add_gamedefinition
+113	Can change game definition	38	change_gamedefinition
+114	Can delete game definition	38	delete_gamedefinition
+115	Can add game session	39	add_gamesession
+116	Can change game session	39	change_gamesession
+117	Can delete game session	39	delete_gamesession
+118	Can add grid direction type	40	add_griddirectiontype
+119	Can change grid direction type	40	change_griddirectiontype
+120	Can delete grid direction type	40	delete_griddirectiontype
+121	Can add grid proximity type	41	add_gridproximitytype
+122	Can change grid proximity type	41	change_gridproximitytype
+123	Can delete grid proximity type	41	delete_gridproximitytype
+124	Can add orientation type	42	add_orientationtype
+125	Can change orientation type	42	change_orientationtype
+126	Can delete orientation type	42	delete_orientationtype
+127	Can add player	43	add_player
+128	Can change player	43	change_player
+129	Can delete player	43	delete_player
+130	Can add player m2m game session	44	add_playerm2mgamesession
+131	Can change player m2m game session	44	change_playerm2mgamesession
+132	Can delete player m2m game session	44	delete_playerm2mgamesession
+133	Can add visibility type	45	add_visibilitytype
+134	Can change visibility type	45	change_visibilitytype
+135	Can delete visibility type	45	delete_visibilitytype
+\.
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: cg_schema; Owner: mharris
+--
+
+SELECT pg_catalog.setval('auth_permission_id_seq', 135, true);
+
+
+--
+-- Data for Name: auth_user; Type: TABLE DATA; Schema: cg_schema; Owner: mharris
+--
+
+COPY auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
+1	pbkdf2_sha256$24000$VmSbbr8wOfrl$cqig9ZFkJUpSuhjoE5TjjcEG4dzlQRM0jRBoEaREeIY=	2016-01-31 01:23:03.7746-05	t	mharris			admin@example.com	t	t	2016-01-30 01:44:04.941256-05
+\.
+
+
+--
+-- Data for Name: auth_user_groups; Type: TABLE DATA; Schema: cg_schema; Owner: mharris
+--
+
+COPY auth_user_groups (id, user_id, group_id) FROM stdin;
+\.
+
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE SET; Schema: cg_schema; Owner: mharris
+--
+
+SELECT pg_catalog.setval('auth_user_groups_id_seq', 1, false);
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: cg_schema; Owner: mharris
+--
+
+SELECT pg_catalog.setval('auth_user_id_seq', 1, true);
+
+
+--
+-- Data for Name: auth_user_user_permissions; Type: TABLE DATA; Schema: cg_schema; Owner: mharris
+--
+
+COPY auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: cg_schema; Owner: mharris
+--
+
+SELECT pg_catalog.setval('auth_user_user_permissions_id_seq', 1, false);
+
 
 --
 -- Data for Name: box_definition; Type: TABLE DATA; Schema: cg_schema; Owner: mharris
@@ -955,7 +1598,182 @@ COPY box_definition_m2m_deck_definition (id, deck_definition_id, box_definition_
 -- Data for Name: card; Type: TABLE DATA; Schema: cg_schema; Owner: mharris
 --
 
-COPY card (id, deck_definition_m2m_card_definition_id, deck_id, card_in_collection_id) FROM stdin;
+COPY card (id, deck_definition_m2m_card_definition_id, deck_id) FROM stdin;
+66	298	1
+67	351	1
+68	347	1
+69	343	1
+70	339	1
+71	335	1
+72	331	1
+73	327	1
+74	299	1
+75	352	1
+76	348	1
+77	344	1
+78	340	1
+79	336	1
+80	332	1
+81	328	1
+82	300	1
+83	353	1
+84	349	1
+85	345	1
+86	341	1
+87	337	1
+88	333	1
+89	329	1
+90	301	1
+91	354	1
+92	350	1
+93	346	1
+94	342	1
+95	338	1
+96	334	1
+97	330	1
+98	304	1
+99	384	1
+100	364	1
+101	305	1
+102	385	1
+103	365	1
+104	306	1
+105	386	1
+106	366	1
+107	307	1
+108	387	1
+109	367	1
+56	302	4
+57	363	4
+58	362	4
+59	361	4
+60	360	4
+61	359	4
+62	358	4
+2	109	2
+3	110	2
+4	111	2
+5	112	2
+6	113	2
+7	114	2
+8	115	2
+9	116	2
+10	117	2
+11	118	2
+110	308	1
+111	388	1
+112	368	1
+113	309	1
+114	389	1
+65	355	4
+64	356	4
+63	357	4
+12	119	2
+13	120	2
+14	121	2
+15	122	2
+16	123	2
+17	124	2
+18	125	2
+19	126	2
+20	127	2
+21	128	2
+22	129	2
+23	130	2
+24	131	2
+25	132	2
+26	133	2
+27	134	2
+28	135	2
+29	136	2
+30	137	2
+31	138	2
+32	139	2
+33	140	2
+34	141	2
+35	142	2
+36	143	2
+37	144	2
+38	145	2
+39	146	2
+40	147	2
+41	148	2
+42	149	2
+43	150	2
+44	151	2
+45	152	2
+46	153	2
+47	154	2
+48	155	2
+49	156	2
+50	157	2
+51	158	2
+52	159	2
+53	160	2
+54	161	2
+55	162	2
+166	408	5
+167	409	5
+168	410	5
+169	411	5
+170	412	5
+171	413	5
+172	415	6
+173	416	6
+174	417	6
+175	418	6
+176	419	6
+115	369	1
+116	310	1
+117	390	1
+118	370	1
+119	311	1
+120	391	1
+121	371	1
+122	312	1
+123	392	1
+124	372	1
+125	313	1
+126	393	1
+127	373	1
+128	314	1
+129	394	1
+130	374	1
+131	315	1
+132	395	1
+133	375	1
+134	316	1
+135	396	1
+136	376	1
+137	317	1
+138	397	1
+139	377	1
+140	318	1
+141	398	1
+142	378	1
+143	319	1
+144	399	1
+145	379	1
+146	320	1
+147	400	1
+148	380	1
+149	321	1
+150	401	1
+151	381	1
+152	322	1
+153	402	1
+154	382	1
+155	323	1
+156	404	1
+157	324	1
+158	405	1
+159	325	1
+160	406	1
+161	326	1
+162	407	1
+163	303	1
+164	403	1
+165	383	1
 \.
 
 
@@ -1474,14 +2292,20 @@ SELECT pg_catalog.setval('card_definition_id_seq', 120, true);
 -- Name: card_id_seq; Type: SEQUENCE SET; Schema: cg_schema; Owner: mharris
 --
 
-SELECT pg_catalog.setval('card_id_seq', 1, false);
+SELECT pg_catalog.setval('card_id_seq', 176, true);
 
 
 --
 -- Data for Name: card_in_array; Type: TABLE DATA; Schema: cg_schema; Owner: mharris
 --
 
-COPY card_in_array (card_in_collection_id, "order") FROM stdin;
+COPY card_in_array (card_in_collection_id, ordinal) FROM stdin;
+1095	1
+1096	1
+1097	1
+1098	1
+1099	1
+1100	1
 \.
 
 
@@ -1489,7 +2313,175 @@ COPY card_in_array (card_in_collection_id, "order") FROM stdin;
 -- Data for Name: card_in_collection; Type: TABLE DATA; Schema: cg_schema; Owner: mharris
 --
 
-COPY card_in_collection (id, collection_id, visible_to_others, visible_to_player, orientation_type_id) FROM stdin;
+COPY card_in_collection (id, collection_id, visible_to_others, visible_to_player, orientation_type_id, card_id) FROM stdin;
+995	7	f	f	1	66
+996	7	f	f	1	67
+997	7	f	f	1	68
+998	7	f	f	1	69
+999	7	f	f	1	70
+1000	7	f	f	1	71
+1001	7	f	f	1	72
+1002	7	f	f	1	73
+1003	7	f	f	1	74
+1004	7	f	f	1	75
+1005	7	f	f	1	76
+1006	7	f	f	1	77
+1007	7	f	f	1	78
+1008	7	f	f	1	79
+1009	7	f	f	1	80
+1010	7	f	f	1	81
+1011	7	f	f	1	82
+1012	7	f	f	1	83
+1013	7	f	f	1	84
+1014	7	f	f	1	85
+1015	7	f	f	1	86
+1016	7	f	f	1	87
+1017	7	f	f	1	88
+1018	7	f	f	1	89
+1019	7	f	f	1	90
+729	3	f	f	1	2
+730	3	f	f	1	3
+731	3	f	f	1	4
+732	3	f	f	1	5
+733	3	f	f	1	6
+734	3	f	f	1	7
+735	3	f	f	1	8
+736	3	f	f	1	9
+737	3	f	f	1	10
+738	3	f	f	1	11
+739	3	f	f	1	12
+740	3	f	f	1	13
+741	3	f	f	1	14
+742	3	f	f	1	15
+743	3	f	f	1	16
+744	3	f	f	1	17
+745	3	f	f	1	18
+746	3	f	f	1	19
+747	3	f	f	1	20
+748	3	f	f	1	21
+749	3	f	f	1	22
+750	3	f	f	1	23
+751	3	f	f	1	24
+752	3	f	f	1	25
+753	3	f	f	1	26
+754	3	f	f	1	27
+755	3	f	f	1	28
+756	3	f	f	1	29
+757	3	f	f	1	30
+758	3	f	f	1	31
+759	3	f	f	1	32
+760	3	f	f	1	33
+761	3	f	f	1	34
+762	3	f	f	1	35
+763	3	f	f	1	36
+764	3	f	f	1	37
+765	3	f	f	1	38
+766	3	f	f	1	39
+767	3	f	f	1	40
+768	3	f	f	1	41
+769	3	f	f	1	42
+770	3	f	f	1	43
+771	3	f	f	1	44
+772	3	f	f	1	45
+773	3	f	f	1	46
+774	3	f	f	1	47
+775	3	f	f	1	48
+776	3	f	f	1	49
+777	3	f	f	1	50
+778	3	f	f	1	51
+779	3	f	f	1	52
+780	3	f	f	1	53
+781	3	f	f	1	54
+782	3	f	f	1	55
+1020	7	f	f	1	91
+1021	7	f	f	1	92
+1022	7	f	f	1	93
+1023	7	f	f	1	94
+1024	7	f	f	1	95
+1025	7	f	f	1	96
+1026	7	f	f	1	97
+1027	7	f	f	1	98
+1028	7	f	f	1	99
+1029	7	f	f	1	100
+1030	7	f	f	1	101
+1031	7	f	f	1	102
+1032	7	f	f	1	103
+1033	7	f	f	1	104
+1034	7	f	f	1	105
+1035	7	f	f	1	106
+1036	7	f	f	1	107
+1037	7	f	f	1	108
+1038	7	f	f	1	109
+1039	7	f	f	1	110
+1040	7	f	f	1	111
+1041	7	f	f	1	112
+1042	7	f	f	1	113
+1043	7	f	f	1	114
+1106	14	t	t	1	65
+1107	15	t	t	1	64
+1108	16	t	t	1	63
+1095	20	t	t	1	166
+1096	20	t	t	1	167
+1097	20	t	t	1	168
+1098	20	t	t	1	169
+1099	20	t	t	1	170
+1100	20	t	t	1	171
+1101	8	f	f	1	172
+1102	8	f	f	1	173
+1103	8	f	f	1	174
+1104	8	f	f	1	175
+1105	8	f	f	1	176
+1044	7	f	f	1	115
+1045	7	f	f	1	116
+1046	7	f	f	1	117
+1047	7	f	f	1	118
+1048	7	f	f	1	119
+1049	7	f	f	1	120
+1050	7	f	f	1	121
+1051	7	f	f	1	122
+1052	7	f	f	1	123
+1053	7	f	f	1	124
+1054	7	f	f	1	125
+1055	7	f	f	1	126
+1056	7	f	f	1	127
+1057	7	f	f	1	128
+1058	7	f	f	1	129
+1059	7	f	f	1	130
+1060	7	f	f	1	131
+1061	7	f	f	1	132
+1062	7	f	f	1	133
+1063	7	f	f	1	134
+1064	7	f	f	1	135
+1065	7	f	f	1	136
+1066	7	f	f	1	137
+1067	7	f	f	1	138
+1068	7	f	f	1	139
+1069	7	f	f	1	140
+1070	7	f	f	1	141
+1071	7	f	f	1	142
+1072	7	f	f	1	143
+1073	7	f	f	1	144
+1074	7	f	f	1	145
+1075	7	f	f	1	146
+1076	7	f	f	1	147
+1077	7	f	f	1	148
+1078	7	f	f	1	149
+1079	7	f	f	1	150
+1080	7	f	f	1	151
+1081	7	f	f	1	152
+1082	7	f	f	1	153
+1083	7	f	f	1	154
+1084	7	f	f	1	155
+1085	7	f	f	1	156
+1086	7	f	f	1	157
+1087	7	f	f	1	158
+1088	7	f	f	1	159
+1089	7	f	f	1	160
+1090	7	f	f	1	161
+1091	7	f	f	1	162
+1092	7	f	f	1	163
+1093	7	f	f	1	164
+1094	7	f	f	1	165
 \.
 
 
@@ -1497,14 +2489,14 @@ COPY card_in_collection (id, collection_id, visible_to_others, visible_to_player
 -- Name: card_in_collection_id_seq; Type: SEQUENCE SET; Schema: cg_schema; Owner: mharris
 --
 
-SELECT pg_catalog.setval('card_in_collection_id_seq', 1, false);
+SELECT pg_catalog.setval('card_in_collection_id_seq', 1108, true);
 
 
 --
 -- Data for Name: card_in_fan; Type: TABLE DATA; Schema: cg_schema; Owner: mharris
 --
 
-COPY card_in_fan (card_in_collection_id, "order") FROM stdin;
+COPY card_in_fan (card_in_collection_id, ordinal) FROM stdin;
 \.
 
 
@@ -1513,6 +2505,9 @@ COPY card_in_fan (card_in_collection_id, "order") FROM stdin;
 --
 
 COPY card_in_grid (card_in_collection_id, other_card, grid_direction_type_id, grid_proximity_type_id) FROM stdin;
+1106	\N	\N	\N
+1107	\N	\N	\N
+1108	\N	\N	\N
 \.
 
 
@@ -1520,7 +2515,166 @@ COPY card_in_grid (card_in_collection_id, other_card, grid_direction_type_id, gr
 -- Data for Name: card_in_pile; Type: TABLE DATA; Schema: cg_schema; Owner: mharris
 --
 
-COPY card_in_pile (card_in_collection_id, "order") FROM stdin;
+COPY card_in_pile (card_in_collection_id, ordinal) FROM stdin;
+729	1
+730	1
+731	1
+732	1
+733	1
+734	1
+735	1
+736	1
+737	1
+738	1
+739	1
+740	1
+741	1
+742	1
+743	1
+744	1
+745	1
+746	1
+747	1
+748	1
+749	1
+750	1
+751	1
+752	1
+753	1
+754	1
+755	1
+756	1
+757	1
+758	1
+759	1
+760	1
+761	1
+762	1
+763	1
+764	1
+765	1
+766	1
+767	1
+768	1
+769	1
+770	1
+771	1
+772	1
+773	1
+774	1
+775	1
+776	1
+777	1
+778	1
+779	1
+780	1
+781	1
+782	1
+1101	1
+1102	1
+1103	1
+1104	1
+1105	1
+995	1
+996	1
+997	1
+998	1
+999	1
+1000	1
+1001	1
+1002	1
+1003	1
+1004	1
+1005	1
+1006	1
+1007	1
+1008	1
+1009	1
+1010	1
+1011	1
+1012	1
+1013	1
+1014	1
+1015	1
+1016	1
+1017	1
+1018	1
+1019	1
+1020	1
+1021	1
+1022	1
+1023	1
+1024	1
+1025	1
+1026	1
+1027	1
+1028	1
+1029	1
+1030	1
+1031	1
+1032	1
+1033	1
+1034	1
+1035	1
+1036	1
+1037	1
+1038	1
+1039	1
+1040	1
+1041	1
+1042	1
+1043	1
+1044	1
+1045	1
+1046	1
+1047	1
+1048	1
+1049	1
+1050	1
+1051	1
+1052	1
+1053	1
+1054	1
+1055	1
+1056	1
+1057	1
+1058	1
+1059	1
+1060	1
+1061	1
+1062	1
+1063	1
+1064	1
+1065	1
+1066	1
+1067	1
+1068	1
+1069	1
+1070	1
+1071	1
+1072	1
+1073	1
+1074	1
+1075	1
+1076	1
+1077	1
+1078	1
+1079	1
+1080	1
+1081	1
+1082	1
+1083	1
+1084	1
+1085	1
+1086	1
+1087	1
+1088	1
+1089	1
+1090	1
+1091	1
+1092	1
+1093	1
+1094	1
 \.
 
 
@@ -1555,7 +2709,27 @@ SELECT pg_catalog.setval('card_type_id_seq', 5, true);
 -- Data for Name: collection; Type: TABLE DATA; Schema: cg_schema; Owner: mharris
 --
 
-COPY collection (id, collection_definition_id, parent_collection_id, name, player_m2m_game_session_id) FROM stdin;
+COPY collection (id, collection_definition_id, parent_collection_id, name, player_m2m_game_session_id, game_session_id) FROM stdin;
+1	9	\N	\N	\N	1
+2	13	\N	\N	\N	2
+3	1	1	\N	\N	2
+4	2	1	\N	\N	2
+5	3	1	\N	4	2
+6	3	1	\N	5	2
+7	1	2	Main draw	\N	1
+8	1	2	Trade draw	\N	1
+9	2	2	Main discard	\N	1
+10	2	2	Trade discard	\N	1
+11	3	2	\N	1	1
+12	3	2	\N	2	1
+13	3	2	\N	3	1
+14	14	2	\N	3	1
+15	14	2	\N	2	1
+16	14	2	\N	1	1
+17	15	2	\N	1	1
+18	15	2	\N	2	1
+19	15	2	\N	3	1
+20	16	2	\N	\N	1
 \.
 
 
@@ -1575,6 +2749,8 @@ COPY collection_definition (id, per_player, name, collection_type_id) FROM stdin
 13	f	San Juan layout	4
 12	f	Winning hand	1
 14	t	Player area	5
+15	t	Player role	3
+16	f	Roles	3
 \.
 
 
@@ -1582,7 +2758,7 @@ COPY collection_definition (id, per_player, name, collection_type_id) FROM stdin
 -- Name: collection_definition_id_seq; Type: SEQUENCE SET; Schema: cg_schema; Owner: mharris
 --
 
-SELECT pg_catalog.setval('collection_definition_id_seq', 14, true);
+SELECT pg_catalog.setval('collection_definition_id_seq', 16, true);
 
 
 --
@@ -1601,9 +2777,14 @@ COPY collection_definition_parent_child (id, child_collection_definition_id, par
 9	2	11	\N
 10	3	11	\N
 11	12	11	\N
-12	1	13	\N
-13	2	13	\N
 14	3	13	\N
+45	14	13	\N
+46	15	13	\N
+47	16	13	\N
+48	1	13	Trade values draw pile
+49	2	13	Trade values discard pile
+12	1	13	Main draw pile
+13	2	13	Main discard pile
 \.
 
 
@@ -1611,14 +2792,14 @@ COPY collection_definition_parent_child (id, child_collection_definition_id, par
 -- Name: collection_definition_parent_child_id_seq; Type: SEQUENCE SET; Schema: cg_schema; Owner: mharris
 --
 
-SELECT pg_catalog.setval('collection_definition_parent_child_id_seq', 44, true);
+SELECT pg_catalog.setval('collection_definition_parent_child_id_seq', 49, true);
 
 
 --
 -- Name: collection_id_seq; Type: SEQUENCE SET; Schema: cg_schema; Owner: mharris
 --
 
-SELECT pg_catalog.setval('collection_id_seq', 1, false);
+SELECT pg_catalog.setval('collection_id_seq', 20, true);
 
 
 --
@@ -1646,6 +2827,11 @@ SELECT pg_catalog.setval('collection_type_id_seq', 6, true);
 --
 
 COPY deck (id, box_definition_m2m_deck_definition_id, game_session_id) FROM stdin;
+2	1	2
+1	3	1
+4	6	1
+5	7	1
+6	8	1
 \.
 
 
@@ -1943,7 +3129,119 @@ COPY deck_definition_m2m_card_definition (id, deck_definition_id, card_definitio
 -- Name: deck_id_seq; Type: SEQUENCE SET; Schema: cg_schema; Owner: mharris
 --
 
-SELECT pg_catalog.setval('deck_id_seq', 1, false);
+SELECT pg_catalog.setval('deck_id_seq', 6, true);
+
+
+--
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: cg_schema; Owner: mharris
+--
+
+COPY django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+\.
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: cg_schema; Owner: mharris
+--
+
+SELECT pg_catalog.setval('django_admin_log_id_seq', 1, false);
+
+
+--
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: cg_schema; Owner: mharris
+--
+
+COPY django_content_type (id, app_label, model) FROM stdin;
+1	admin	logentry
+2	auth	permission
+3	auth	group
+4	auth	user
+5	contenttypes	contenttype
+6	sessions	session
+7	definitions	authgroup
+8	definitions	authgrouppermissions
+9	definitions	authpermission
+10	definitions	authuser
+11	definitions	authusergroups
+12	definitions	authuseruserpermissions
+13	definitions	boxdefinition
+14	definitions	boxdefinitionm2mdeckdefinition
+15	definitions	card
+16	definitions	carddefinition
+17	definitions	carddefinitionattribute
+18	definitions	carddefinitionattributedefinition
+19	definitions	cardinarray
+20	definitions	cardincollection
+21	definitions	cardinfan
+22	definitions	cardingrid
+23	definitions	cardinpile
+24	definitions	cardintabletop
+25	definitions	cardtype
+26	definitions	collection
+27	definitions	collectiondefinition
+28	definitions	collectiondefinitionparentchild
+29	definitions	collectiontype
+30	definitions	deck
+31	definitions	deckdefinition
+32	definitions	deckdefinitionm2mcarddefinition
+33	definitions	djangoadminlog
+34	definitions	djangocontenttype
+35	definitions	djangomigrations
+36	definitions	djangosession
+37	definitions	facedefinition
+38	definitions	gamedefinition
+39	definitions	gamesession
+40	definitions	griddirectiontype
+41	definitions	gridproximitytype
+42	definitions	orientationtype
+43	definitions	player
+44	definitions	playerm2mgamesession
+45	definitions	visibilitytype
+\.
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: cg_schema; Owner: mharris
+--
+
+SELECT pg_catalog.setval('django_content_type_id_seq', 45, true);
+
+
+--
+-- Data for Name: django_migrations; Type: TABLE DATA; Schema: cg_schema; Owner: mharris
+--
+
+COPY django_migrations (id, app, name, applied) FROM stdin;
+1	contenttypes	0001_initial	2016-01-29 22:06:12.468494-05
+2	auth	0001_initial	2016-01-29 22:06:12.524711-05
+3	admin	0001_initial	2016-01-29 22:06:12.547905-05
+4	admin	0002_logentry_remove_auto_add	2016-01-29 22:06:12.561199-05
+5	contenttypes	0002_remove_content_type_name	2016-01-29 22:06:12.586714-05
+6	auth	0002_alter_permission_name_max_length	2016-01-29 22:06:12.597169-05
+7	auth	0003_alter_user_email_max_length	2016-01-29 22:06:12.607272-05
+8	auth	0004_alter_user_username_opts	2016-01-29 22:06:12.618848-05
+9	auth	0005_alter_user_last_login_null	2016-01-29 22:06:12.62886-05
+10	auth	0006_require_contenttypes_0002	2016-01-29 22:06:12.630619-05
+11	auth	0007_alter_validators_add_error_messages	2016-01-29 22:06:12.639556-05
+12	sessions	0001_initial	2016-01-29 22:06:12.648239-05
+13	definitions	0001_initial	2016-01-30 01:09:29.303011-05
+\.
+
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: cg_schema; Owner: mharris
+--
+
+SELECT pg_catalog.setval('django_migrations_id_seq', 13, true);
+
+
+--
+-- Data for Name: django_session; Type: TABLE DATA; Schema: cg_schema; Owner: mharris
+--
+
+COPY django_session (session_key, session_data, expire_date) FROM stdin;
+ul6mb9mei91vwa3n3293oc5ftz3hxq9t	MzFlYzdhZDE2YzQ5ZmU3NTQxY2E2OTk2MGUwNmI2NGI3NjRlNjljZDp7Il9hdXRoX3VzZXJfaGFzaCI6ImIwNWRmNjVhNWMwNmRjZjllNDM1ZTE1Mzk2ZDc3MzQ1ZGMxODEwNGEiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2016-02-14 01:23:03.776279-05
+\.
 
 
 --
@@ -1964,7 +3262,6 @@ COPY face_definition (id, text_display, large_image, small_image) FROM stdin;
 78	J♢	\N	\N
 79	Q♢	\N	\N
 80	K♢	\N	\N
-110	[]	\N	\N
 111	Joker1	\N	\N
 112	Joker2	\N	\N
 113	C♢	\N	\N
@@ -2075,6 +3372,7 @@ COPY face_definition (id, text_display, large_image, small_image) FROM stdin;
 179	X X X X X	\N	\N
 180	{}	\N	\N
 181	Fool	\N	\N
+110	[ ]	\N	\N
 \.
 
 
@@ -2109,6 +3407,8 @@ SELECT pg_catalog.setval('game_definition_id_seq', 4, true);
 --
 
 COPY game_session (id, game_definition_id) FROM stdin;
+1	4
+2	1
 \.
 
 
@@ -2116,7 +3416,7 @@ COPY game_session (id, game_definition_id) FROM stdin;
 -- Name: game_session_id_seq; Type: SEQUENCE SET; Schema: cg_schema; Owner: mharris
 --
 
-SELECT pg_catalog.setval('game_session_id_seq', 1, false);
+SELECT pg_catalog.setval('game_session_id_seq', 2, true);
 
 
 --
@@ -2160,14 +3460,6 @@ SELECT pg_catalog.setval('grid_proximity_type_id_seq', 5, true);
 
 
 --
--- Data for Name: initial_layout_definition_m2m_collection_definition; Type: TABLE DATA; Schema: cg_schema; Owner: mharris
---
-
-COPY initial_layout_definition_m2m_collection_definition ("Id") FROM stdin;
-\.
-
-
---
 -- Data for Name: orientation_type; Type: TABLE DATA; Schema: cg_schema; Owner: mharris
 --
 
@@ -2191,6 +3483,10 @@ SELECT pg_catalog.setval('orientation_type_id_seq', 4, true);
 --
 
 COPY player (id, user_name) FROM stdin;
+1	mharris
+2	daphneharris
+3	ariellaharris
+4	abigailharris
 \.
 
 
@@ -2198,14 +3494,14 @@ COPY player (id, user_name) FROM stdin;
 -- Name: player_M2M_game_session_id_seq; Type: SEQUENCE SET; Schema: cg_schema; Owner: mharris
 --
 
-SELECT pg_catalog.setval('"player_M2M_game_session_id_seq"', 1, false);
+SELECT pg_catalog.setval('"player_M2M_game_session_id_seq"', 5, true);
 
 
 --
 -- Name: player_id_seq; Type: SEQUENCE SET; Schema: cg_schema; Owner: mharris
 --
 
-SELECT pg_catalog.setval('player_id_seq', 1, false);
+SELECT pg_catalog.setval('player_id_seq', 4, true);
 
 
 --
@@ -2213,6 +3509,11 @@ SELECT pg_catalog.setval('player_id_seq', 1, false);
 --
 
 COPY player_m2m_game_session (id, player_id, player_alias, game_session_id) FROM stdin;
+1	1	Marc playing San Juan	1
+2	2	\N	1
+3	3	\N	1
+4	1	Marc playing yaniv	2
+5	4	\N	2
 \.
 
 
@@ -2229,6 +3530,142 @@ COPY visibility_type (id, visibility) FROM stdin;
 --
 
 SELECT pg_catalog.setval('visibility_type_id_seq', 1, false);
+
+
+--
+-- Name: auth_group_name_key; Type: CONSTRAINT; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- Name: auth_group_permissions_group_id_0cd325b0_uniq; Type: CONSTRAINT; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_0cd325b0_uniq UNIQUE (group_id, permission_id);
+
+
+--
+-- Name: auth_group_permissions_pkey; Type: CONSTRAINT; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group_pkey; Type: CONSTRAINT; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_permission_content_type_id_01ab375a_uniq; Type: CONSTRAINT; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_01ab375a_uniq UNIQUE (content_type_id, codename);
+
+
+--
+-- Name: auth_permission_pkey; Type: CONSTRAINT; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups_pkey; Type: CONSTRAINT; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups_user_id_94350c0c_uniq; Type: CONSTRAINT; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_94350c0c_uniq UNIQUE (user_id, group_id);
+
+
+--
+-- Name: auth_user_pkey; Type: CONSTRAINT; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user
+    ADD CONSTRAINT auth_user_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions_user_id_14a6b632_uniq; Type: CONSTRAINT; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_14a6b632_uniq UNIQUE (user_id, permission_id);
+
+
+--
+-- Name: auth_user_username_key; Type: CONSTRAINT; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user
+    ADD CONSTRAINT auth_user_username_key UNIQUE (username);
+
+
+--
+-- Name: django_admin_log_pkey; Type: CONSTRAINT; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_content_type_app_label_76bd3d3b_uniq; Type: CONSTRAINT; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+ALTER TABLE ONLY django_content_type
+    ADD CONSTRAINT django_content_type_app_label_76bd3d3b_uniq UNIQUE (app_label, model);
+
+
+--
+-- Name: django_content_type_pkey; Type: CONSTRAINT; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+ALTER TABLE ONLY django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_migrations_pkey; Type: CONSTRAINT; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+ALTER TABLE ONLY django_migrations
+    ADD CONSTRAINT django_migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_session_pkey; Type: CONSTRAINT; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+ALTER TABLE ONLY django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
 
 
 --
@@ -2424,14 +3861,6 @@ ALTER TABLE ONLY grid_proximity_type
 
 
 --
--- Name: pkinitial_layout_definition_m2m_collection_definition; Type: CONSTRAINT; Schema: cg_schema; Owner: mharris; Tablespace: 
---
-
-ALTER TABLE ONLY initial_layout_definition_m2m_collection_definition
-    ADD CONSTRAINT pkinitial_layout_definition_m2m_collection_definition PRIMARY KEY ("Id");
-
-
---
 -- Name: pkorientation_type; Type: CONSTRAINT; Schema: cg_schema; Owner: mharris; Tablespace: 
 --
 
@@ -2461,6 +3890,76 @@ ALTER TABLE ONLY player_m2m_game_session
 
 ALTER TABLE ONLY visibility_type
     ADD CONSTRAINT pkvisibility_type PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group_name_a6ea08ec_like; Type: INDEX; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+CREATE INDEX auth_group_name_a6ea08ec_like ON auth_group USING btree (name varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions_0e939a4f; Type: INDEX; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+CREATE INDEX auth_group_permissions_0e939a4f ON auth_group_permissions USING btree (group_id);
+
+
+--
+-- Name: auth_group_permissions_8373b171; Type: INDEX; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+CREATE INDEX auth_group_permissions_8373b171 ON auth_group_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_permission_417f1b1c; Type: INDEX; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+CREATE INDEX auth_permission_417f1b1c ON auth_permission USING btree (content_type_id);
+
+
+--
+-- Name: auth_user_groups_0e939a4f; Type: INDEX; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+CREATE INDEX auth_user_groups_0e939a4f ON auth_user_groups USING btree (group_id);
+
+
+--
+-- Name: auth_user_groups_e8701ad4; Type: INDEX; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+CREATE INDEX auth_user_groups_e8701ad4 ON auth_user_groups USING btree (user_id);
+
+
+--
+-- Name: auth_user_user_permissions_8373b171; Type: INDEX; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+CREATE INDEX auth_user_user_permissions_8373b171 ON auth_user_user_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_user_user_permissions_e8701ad4; Type: INDEX; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+CREATE INDEX auth_user_user_permissions_e8701ad4 ON auth_user_user_permissions USING btree (user_id);
+
+
+--
+-- Name: auth_user_username_6821ab7c_like; Type: INDEX; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+CREATE INDEX auth_user_username_6821ab7c_like ON auth_user USING btree (username varchar_pattern_ops);
+
+
+--
+-- Name: card_in_collection_card_id_Idx; Type: INDEX; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+CREATE UNIQUE INDEX "card_in_collection_card_id_Idx" ON card_in_collection USING btree (card_id);
 
 
 --
@@ -2496,6 +3995,34 @@ CREATE UNIQUE INDEX "deck_card_Idx" ON box_definition_m2m_deck_definition USING 
 --
 
 CREATE UNIQUE INDEX "deck_definition_name_Idx" ON deck_definition USING btree (name);
+
+
+--
+-- Name: django_admin_log_417f1b1c; Type: INDEX; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+CREATE INDEX django_admin_log_417f1b1c ON django_admin_log USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_e8701ad4; Type: INDEX; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+CREATE INDEX django_admin_log_e8701ad4 ON django_admin_log USING btree (user_id);
+
+
+--
+-- Name: django_session_de54fa62; Type: INDEX; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+CREATE INDEX django_session_de54fa62 ON django_session USING btree (expire_date);
+
+
+--
+-- Name: django_session_session_key_c0390e0f_like; Type: INDEX; Schema: cg_schema; Owner: mharris; Tablespace: 
+--
+
+CREATE INDEX django_session_session_key_c0390e0f_like ON django_session USING btree (session_key varchar_pattern_ops);
 
 
 --
@@ -2548,6 +4075,78 @@ CREATE UNIQUE INDEX player_name_idx ON player USING btree (user_name);
 
 
 --
+-- Name: auth_group_permiss_permission_id_84c5c92e_fk_auth_permission_id; Type: FK CONSTRAINT; Schema: cg_schema; Owner: mharris
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permiss_permission_id_84c5c92e_fk_auth_permission_id FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissions_group_id_b120cbf9_fk_auth_group_id; Type: FK CONSTRAINT; Schema: cg_schema; Owner: mharris
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_permiss_content_type_id_2f476e4b_fk_django_content_type_id; Type: FK CONSTRAINT; Schema: cg_schema; Owner: mharris
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permiss_content_type_id_2f476e4b_fk_django_content_type_id FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups_group_id_97559544_fk_auth_group_id; Type: FK CONSTRAINT; Schema: cg_schema; Owner: mharris
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_group_id_97559544_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups_user_id_6a12ed8b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: cg_schema; Owner: mharris
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_6a12ed8b_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_user_per_permission_id_1fbb5f2c_fk_auth_permission_id; Type: FK CONSTRAINT; Schema: cg_schema; Owner: mharris
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_per_permission_id_1fbb5f2c_fk_auth_permission_id FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: cg_schema; Owner: mharris
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_content_type_id_c4bce8eb_fk_django_content_type_id; Type: FK CONSTRAINT; Schema: cg_schema; Owner: mharris
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_content_type_id_c4bce8eb_fk_django_content_type_id FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log_user_id_c564eba6_fk_auth_user_id; Type: FK CONSTRAINT; Schema: cg_schema; Owner: mharris
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_user_id_c564eba6_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
 -- Name: fk_box_definition_M2M_deck_definition_box_definition; Type: FK CONSTRAINT; Schema: cg_schema; Owner: mharris
 --
 
@@ -2561,14 +4160,6 @@ ALTER TABLE ONLY box_definition_m2m_deck_definition
 
 ALTER TABLE ONLY box_definition_m2m_deck_definition
     ADD CONSTRAINT "fk_box_definition_M2M_deck_definition_deck_definition" FOREIGN KEY (deck_definition_id) REFERENCES deck_definition(id);
-
-
---
--- Name: fk_card_card_in_collection; Type: FK CONSTRAINT; Schema: cg_schema; Owner: mharris
---
-
-ALTER TABLE ONLY card
-    ADD CONSTRAINT fk_card_card_in_collection FOREIGN KEY (card_in_collection_id) REFERENCES card_in_collection(id);
 
 
 --
@@ -2633,6 +4224,14 @@ ALTER TABLE ONLY card_definition
 
 ALTER TABLE ONLY card_in_array
     ADD CONSTRAINT fk_card_in_array_card_in_collection FOREIGN KEY (card_in_collection_id) REFERENCES card_in_collection(id);
+
+
+--
+-- Name: fk_card_in_collection_card; Type: FK CONSTRAINT; Schema: cg_schema; Owner: mharris
+--
+
+ALTER TABLE ONLY card_in_collection
+    ADD CONSTRAINT fk_card_in_collection_card FOREIGN KEY (card_id) REFERENCES card(id);
 
 
 --
@@ -2737,6 +4336,14 @@ ALTER TABLE ONLY collection_definition_parent_child
 
 ALTER TABLE ONLY collection_definition_parent_child
     ADD CONSTRAINT fk_collection_definition_parent_child_collection_definition FOREIGN KEY (child_collection_definition_id) REFERENCES collection_definition(id);
+
+
+--
+-- Name: fk_collection_game_session; Type: FK CONSTRAINT; Schema: cg_schema; Owner: mharris
+--
+
+ALTER TABLE ONLY collection
+    ADD CONSTRAINT fk_collection_game_session FOREIGN KEY (game_session_id) REFERENCES game_session(id);
 
 
 --
