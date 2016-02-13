@@ -1,0 +1,136 @@
+<HTML>
+<Header>
+<Title>cardgame Foreign Keys</Title>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<Link href="../css/doc.css" rel="stylesheet" type="text/css">
+</Header>
+<Body>
+<table class="logo">
+<tr>
+<td class="logo">cardgame [cardgame-dbwrench.xml]</td>
+</tr>
+</table>
+<table class="horzMenu">
+<tr>
+<td class="horzMenu"><a class="horzMenu" href="../index.html"> Home</a></td><td class="horzMenu">|</td><td class="horzMenu"><a class="horzMenu" href="../tables/index.html">Tables</a></td><td class="horzMenu">|</td><td class="horzMenu"><a class="horzMenu" href="../schemas/index.html">Schemas</a></td><td class="horzMenu">|</td><td class="horzMenu"><a class="horzMenu" href="../diagrams/index.html">Diagrams</a></td><td class="horzMenu">|</td><td class="horzMenu"><a class="horzMenu" href="../foreignKeys/index.html">Foreign Keys</a></td><td class="horzMenu">|</td><td class="horzMenu"><a class="horzMenu" href="../indexes/index.html">Indexes</a></td><td class="horzMenuFiller"></td>
+</tr>
+</table>
+<hr>
+<table class="flat">
+<tr>
+<td class="banner" colspan="5">Foreign Keys</td>
+</tr>
+<tr>
+<td class="Header">Name</td><td class="Header">Parent Table</td><td class="Header">Child Table</td><td class="Header">Parent Columns</td><td class="Header">Child Columns</td>
+</tr>
+<tr>
+<td><a href="../foreignKeys/cg_schema_box_definition_m2m_deck_definition_fk_box_definition_M2M_deck_definition_box_definition.html">fk_box_definition_M2M_deck_definition_box_definition</a></td><td><a href="../tables/cg_schema_box_definition.html">cg_schema.box_definition</a></td><td><a href="../tables/cg_schema_box_definition_m2m_deck_definition.html">cg_schema.box_definition_m2m_deck_definition</a></td><td>id</td><td>box_definition_id</td>
+</tr>
+<tr class="altRow">
+<td><a href="../foreignKeys/cg_schema_box_definition_m2m_deck_definition_fk_box_definition_M2M_deck_definition_deck_definition.html">fk_box_definition_M2M_deck_definition_deck_definition</a></td><td><a href="../tables/cg_schema_deck_definition.html">cg_schema.deck_definition</a></td><td><a href="../tables/cg_schema_box_definition_m2m_deck_definition.html">cg_schema.box_definition_m2m_deck_definition</a></td><td>id</td><td>deck_definition_id</td>
+</tr>
+<tr>
+<td><a href="../foreignKeys/cg_schema_card_fk_card_card_in_collection.html">fk_card_card_in_collection</a></td><td><a href="../tables/cg_schema_card_in_collection.html">cg_schema.card_in_collection</a></td><td><a href="../tables/cg_schema_card.html">cg_schema.card</a></td><td>id</td><td>card_in_collection_id</td>
+</tr>
+<tr class="altRow">
+<td><a href="../foreignKeys/cg_schema_card_fk_card_deck.html">fk_card_deck</a></td><td><a href="../tables/cg_schema_deck.html">cg_schema.deck</a></td><td><a href="../tables/cg_schema_card.html">cg_schema.card</a></td><td>id</td><td>deck_id</td>
+</tr>
+<tr>
+<td><a href="../foreignKeys/cg_schema_card_fk_card_deck_definition_m2m_card_definition.html">fk_card_deck_definition_m2m_card_definition</a></td><td><a href="../tables/cg_schema_deck_definition_m2m_card_definition.html">cg_schema.deck_definition_m2m_card_definition</a></td><td><a href="../tables/cg_schema_card.html">cg_schema.card</a></td><td>id</td><td>deck_definition_m2m_card_definition_id</td>
+</tr>
+<tr class="altRow">
+<td><a href="../foreignKeys/cg_schema_card_definition_fk_card_definition_back.html">fk_card_definition_back</a></td><td><a href="../tables/cg_schema_face_definition.html">cg_schema.face_definition</a></td><td><a href="../tables/cg_schema_card_definition.html">cg_schema.card_definition</a></td><td>id</td><td>back_face_definition_id</td>
+</tr>
+<tr>
+<td><a href="../foreignKeys/cg_schema_card_definition_fk_card_definition_front.html">fk_card_definition_front</a></td><td><a href="../tables/cg_schema_face_definition.html">cg_schema.face_definition</a></td><td><a href="../tables/cg_schema_card_definition.html">cg_schema.card_definition</a></td><td>id</td><td>front_face_definition_id</td>
+</tr>
+<tr class="altRow">
+<td><a href="../foreignKeys/cg_schema_card_definition_attribute_fk_card_definition_attribute_card_definition.html">fk_card_definition_attribute_card_definition</a></td><td><a href="../tables/cg_schema_card_definition.html">cg_schema.card_definition</a></td><td><a href="../tables/cg_schema_card_definition_attribute.html">cg_schema.card_definition_attribute</a></td><td>id</td><td>card_definition_id</td>
+</tr>
+<tr>
+<td><a href="../foreignKeys/cg_schema_card_definition_attribute_fk_card_definition_attribute_card_definition_attribute_definiti.html">fk_card_definition_attribute_card_definition_attribute_definiti</a></td><td><a href="../tables/cg_schema_card_definition_attribute_definition.html">cg_schema.card_definition_attribute_definition</a></td><td><a href="../tables/cg_schema_card_definition_attribute.html">cg_schema.card_definition_attribute</a></td><td>id</td><td>card_definition_attribute_definition_id</td>
+</tr>
+<tr class="altRow">
+<td><a href="../foreignKeys/cg_schema_card_definition_attribute_definition_fk_card_definition_attribute_definition_card_type.html">fk_card_definition_attribute_definition_card_type</a></td><td><a href="../tables/cg_schema_card_type.html">cg_schema.card_type</a></td><td><a href="../tables/cg_schema_card_definition_attribute_definition.html">cg_schema.card_definition_attribute_definition</a></td><td>id</td><td>card_type_id</td>
+</tr>
+<tr>
+<td><a href="../foreignKeys/cg_schema_card_in_array_fk_card_in_array_card_in_collection.html">fk_card_in_array_card_in_collection</a></td><td><a href="../tables/cg_schema_card_in_collection.html">cg_schema.card_in_collection</a></td><td><a href="../tables/cg_schema_card_in_array.html">cg_schema.card_in_array</a></td><td>id</td><td>card_in_collection_id</td>
+</tr>
+<tr class="altRow">
+<td><a href="../foreignKeys/cg_schema_card_in_collection_fk_card_in_collection_collection.html">fk_card_in_collection_collection</a></td><td><a href="../tables/cg_schema_collection.html">cg_schema.collection</a></td><td><a href="../tables/cg_schema_card_in_collection.html">cg_schema.card_in_collection</a></td><td>id</td><td>collection_id</td>
+</tr>
+<tr>
+<td><a href="../foreignKeys/cg_schema_card_in_collection_fk_card_in_collection_orientation_type.html">fk_card_in_collection_orientation_type</a></td><td><a href="../tables/cg_schema_orientation_type.html">cg_schema.orientation_type</a></td><td><a href="../tables/cg_schema_card_in_collection.html">cg_schema.card_in_collection</a></td><td>id</td><td>orientation_type_id</td>
+</tr>
+<tr class="altRow">
+<td><a href="../foreignKeys/cg_schema_card_in_fan_fk_card_in_fan_card_in_collection.html">fk_card_in_fan_card_in_collection</a></td><td><a href="../tables/cg_schema_card_in_collection.html">cg_schema.card_in_collection</a></td><td><a href="../tables/cg_schema_card_in_fan.html">cg_schema.card_in_fan</a></td><td>id</td><td>card_in_collection_id</td>
+</tr>
+<tr>
+<td><a href="../foreignKeys/cg_schema_card_in_grid_fk_card_in_grid_card_in_collection.html">fk_card_in_grid_card_in_collection</a></td><td><a href="../tables/cg_schema_card_in_collection.html">cg_schema.card_in_collection</a></td><td><a href="../tables/cg_schema_card_in_grid.html">cg_schema.card_in_grid</a></td><td>id</td><td>card_in_collection_id</td>
+</tr>
+<tr class="altRow">
+<td><a href="../foreignKeys/cg_schema_card_in_grid_fk_card_in_grid_grid_direction_type.html">fk_card_in_grid_grid_direction_type</a></td><td><a href="../tables/cg_schema_grid_direction_type.html">cg_schema.grid_direction_type</a></td><td><a href="../tables/cg_schema_card_in_grid.html">cg_schema.card_in_grid</a></td><td>id</td><td>grid_direction_type_id</td>
+</tr>
+<tr>
+<td><a href="../foreignKeys/cg_schema_card_in_grid_fk_card_in_grid_grid_proximity_type.html">fk_card_in_grid_grid_proximity_type</a></td><td><a href="../tables/cg_schema_grid_proximity_type.html">cg_schema.grid_proximity_type</a></td><td><a href="../tables/cg_schema_card_in_grid.html">cg_schema.card_in_grid</a></td><td>id</td><td>grid_proximity_type_id</td>
+</tr>
+<tr class="altRow">
+<td><a href="../foreignKeys/cg_schema_card_in_grid_fk_grid_relationship.html">fk_grid_relationship</a></td><td><a href="../tables/cg_schema_card_in_grid.html">cg_schema.card_in_grid</a></td><td><a href="../tables/cg_schema_card_in_grid.html">cg_schema.card_in_grid</a></td><td>card_in_collection_id</td><td>other_card</td>
+</tr>
+<tr>
+<td><a href="../foreignKeys/cg_schema_card_in_pile_fk_card_in_pile_card_in_collection.html">fk_card_in_pile_card_in_collection</a></td><td><a href="../tables/cg_schema_card_in_collection.html">cg_schema.card_in_collection</a></td><td><a href="../tables/cg_schema_card_in_pile.html">cg_schema.card_in_pile</a></td><td>id</td><td>card_in_collection_id</td>
+</tr>
+<tr class="altRow">
+<td><a href="../foreignKeys/cg_schema_card_in_tabletop_fk_card_in_tabletop_card_in_collection.html">fk_card_in_tabletop_card_in_collection</a></td><td><a href="../tables/cg_schema_card_in_collection.html">cg_schema.card_in_collection</a></td><td><a href="../tables/cg_schema_card_in_tabletop.html">cg_schema.card_in_tabletop</a></td><td>id</td><td>card_in_collection_id</td>
+</tr>
+<tr>
+<td><a href="../foreignKeys/cg_schema_collection_fk_collection_collection.html">fk_collection_collection</a></td><td><a href="../tables/cg_schema_collection.html">cg_schema.collection</a></td><td><a href="../tables/cg_schema_collection.html">cg_schema.collection</a></td><td>id</td><td>parent_collection_id</td>
+</tr>
+<tr class="altRow">
+<td><a href="../foreignKeys/cg_schema_collection_fk_collection_collection_definition.html">fk_collection_collection_definition</a></td><td><a href="../tables/cg_schema_collection_definition.html">cg_schema.collection_definition</a></td><td><a href="../tables/cg_schema_collection.html">cg_schema.collection</a></td><td>id</td><td>collection_definition_id</td>
+</tr>
+<tr>
+<td><a href="../foreignKeys/cg_schema_collection_fk_collection_game_session.html">fk_collection_game_session</a></td><td><a href="../tables/cg_schema_game_session.html">cg_schema.game_session</a></td><td><a href="../tables/cg_schema_collection.html">cg_schema.collection</a></td><td>id</td><td>game_session_id</td>
+</tr>
+<tr class="altRow">
+<td><a href="../foreignKeys/cg_schema_collection_fk_collection_player_m2m_game_session.html">fk_collection_player_m2m_game_session</a></td><td><a href="../tables/cg_schema_player_m2m_game_session.html">cg_schema.player_m2m_game_session</a></td><td><a href="../tables/cg_schema_collection.html">cg_schema.collection</a></td><td>id</td><td>player_m2m_game_session_id</td>
+</tr>
+<tr>
+<td><a href="../foreignKeys/cg_schema_collection_definition_fk_collection_definition_collection_type.html">fk_collection_definition_collection_type</a></td><td><a href="../tables/cg_schema_collection_type.html">cg_schema.collection_type</a></td><td><a href="../tables/cg_schema_collection_definition.html">cg_schema.collection_definition</a></td><td>id</td><td>collection_type_id</td>
+</tr>
+<tr class="altRow">
+<td><a href="../foreignKeys/cg_schema_collection_definition_parent_child_fk_collection_definition_parent_child_box_definition.html">fk_collection_definition_parent_child_box_definition</a></td><td><a href="../tables/cg_schema_collection_definition.html">cg_schema.collection_definition</a></td><td><a href="../tables/cg_schema_collection_definition_parent_child.html">cg_schema.collection_definition_parent_child</a></td><td>id</td><td>parent_collection_definition_id</td>
+</tr>
+<tr>
+<td><a href="../foreignKeys/cg_schema_collection_definition_parent_child_fk_collection_definition_parent_child_collection_definition.html">fk_collection_definition_parent_child_collection_definition</a></td><td><a href="../tables/cg_schema_collection_definition.html">cg_schema.collection_definition</a></td><td><a href="../tables/cg_schema_collection_definition_parent_child.html">cg_schema.collection_definition_parent_child</a></td><td>id</td><td>child_collection_definition_id</td>
+</tr>
+<tr class="altRow">
+<td><a href="../foreignKeys/cg_schema_deck_fk_deck_box_definition_m2m_deck_definition.html">fk_deck_box_definition_m2m_deck_definition</a></td><td><a href="../tables/cg_schema_box_definition_m2m_deck_definition.html">cg_schema.box_definition_m2m_deck_definition</a></td><td><a href="../tables/cg_schema_deck.html">cg_schema.deck</a></td><td>id</td><td>box_definition_m2m_deck_definition_id</td>
+</tr>
+<tr>
+<td><a href="../foreignKeys/cg_schema_deck_fk_deck_game_session.html">fk_deck_game_session</a></td><td><a href="../tables/cg_schema_game_session.html">cg_schema.game_session</a></td><td><a href="../tables/cg_schema_deck.html">cg_schema.deck</a></td><td>id</td><td>game_session_id</td>
+</tr>
+<tr class="altRow">
+<td><a href="../foreignKeys/cg_schema_deck_definition_m2m_card_definition_fk_deck_definition_M2M_card_definition_card_definition.html">fk_deck_definition_M2M_card_definition_card_definition</a></td><td><a href="../tables/cg_schema_card_definition.html">cg_schema.card_definition</a></td><td><a href="../tables/cg_schema_deck_definition_m2m_card_definition.html">cg_schema.deck_definition_m2m_card_definition</a></td><td>id</td><td>card_definition_id</td>
+</tr>
+<tr>
+<td><a href="../foreignKeys/cg_schema_deck_definition_m2m_card_definition_fk_deck_definition_M2M_card_definition_deck_definition.html">fk_deck_definition_M2M_card_definition_deck_definition</a></td><td><a href="../tables/cg_schema_deck_definition.html">cg_schema.deck_definition</a></td><td><a href="../tables/cg_schema_deck_definition_m2m_card_definition.html">cg_schema.deck_definition_m2m_card_definition</a></td><td>id</td><td>deck_definition_id</td>
+</tr>
+<tr class="altRow">
+<td><a href="../foreignKeys/cg_schema_game_definition_fk_initial_layout_definition_box_definition.html">fk_initial_layout_definition_box_definition</a></td><td><a href="../tables/cg_schema_box_definition.html">cg_schema.box_definition</a></td><td><a href="../tables/cg_schema_game_definition.html">cg_schema.game_definition</a></td><td>id</td><td>box_definition_id</td>
+</tr>
+<tr>
+<td><a href="../foreignKeys/cg_schema_game_definition_fk_initial_layout_definition_collection_definition.html">fk_initial_layout_definition_collection_definition</a></td><td><a href="../tables/cg_schema_collection_definition.html">cg_schema.collection_definition</a></td><td><a href="../tables/cg_schema_game_definition.html">cg_schema.game_definition</a></td><td>id</td><td>initial_collection_definition_id</td>
+</tr>
+<tr class="altRow">
+<td><a href="../foreignKeys/cg_schema_game_session_fk_game_session_game_definition.html">fk_game_session_game_definition</a></td><td><a href="../tables/cg_schema_game_definition.html">cg_schema.game_definition</a></td><td><a href="../tables/cg_schema_game_session.html">cg_schema.game_session</a></td><td>id</td><td>game_definition_id</td>
+</tr>
+<tr>
+<td><a href="../foreignKeys/cg_schema_player_m2m_game_session_fk_player_M2M_game_session_game_session.html">fk_player_M2M_game_session_game_session</a></td><td><a href="../tables/cg_schema_game_session.html">cg_schema.game_session</a></td><td><a href="../tables/cg_schema_player_m2m_game_session.html">cg_schema.player_m2m_game_session</a></td><td>id</td><td>game_session_id</td>
+</tr>
+<tr class="altRow">
+<td><a href="../foreignKeys/cg_schema_player_m2m_game_session_fk_player_M2M_game_session_player.html">fk_player_M2M_game_session_player</a></td><td><a href="../tables/cg_schema_player.html">cg_schema.player</a></td><td><a href="../tables/cg_schema_player_m2m_game_session.html">cg_schema.player_m2m_game_session</a></td><td>id</td><td>player_id</td>
+</tr>
+</table>
+</Body>
+</HTML>

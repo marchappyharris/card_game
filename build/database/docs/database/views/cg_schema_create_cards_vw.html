@@ -1,0 +1,46 @@
+<HTML>
+<Header>
+<Title>create_cards_vw - View</Title>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<Link href="../css/doc.css" rel="stylesheet" type="text/css">
+</Header>
+<Body>
+<table class="logo">
+<tr>
+<td class="logo">cardgame [cardgame-dbwrench.xml]</td>
+</tr>
+</table>
+<table class="horzMenu">
+<tr>
+<td class="horzMenu"><a class="horzMenu" href="../index.html"> Home</a></td><td class="horzMenu">|</td><td class="horzMenu"><a class="horzMenu" href="../tables/index.html">Tables</a></td><td class="horzMenu">|</td><td class="horzMenu"><a class="horzMenu" href="../schemas/index.html">Schemas</a></td><td class="horzMenu">|</td><td class="horzMenu"><a class="horzMenu" href="../diagrams/index.html">Diagrams</a></td><td class="horzMenu">|</td><td class="horzMenu"><a class="horzMenu" href="../foreignKeys/index.html">Foreign Keys</a></td><td class="horzMenu">|</td><td class="horzMenu"><a class="horzMenu" href="../indexes/index.html">Indexes</a></td><td class="horzMenuFiller"></td>
+</tr>
+</table>
+<hr>
+<table class="flat">
+<tr class="banner">
+<td class="title_nm">cg_schema.create_cards_vw</td><td class="watermark_right">(View)</td>
+</tr>
+<tr>
+<td class="key">Name</td><td class="value">create_cards_vw</td>
+</tr>
+<tr>
+<td class="key">SQL</td><td class="value">
+<pre>select
+  dc_d.id deck_definition_m2m_card_definition_id,
+  d.id deck_id,
+  d.id d_id, d.box_definition_m2m_deck_definition_id d_box_definition_m2m_deck_definition_id, d.game_session_id d_game_session_id,
+  bd_d.id bd_d_id, bd_d.deck_definition_id bd_d_box_definition_id, bd_d.deck_name bd_d_deck_name,
+  d_d.id d_d_id, d_d.name d_d_name,
+  dc_d.id dc_d_id, dc_d.deck_definition_id dc_d_deck_definition_id, dc_d.card_definition_id dc_d_card_definition_id, dc_d.ordinal dc_d_ordinal,
+  c_d.id c_d_id, c_d.name c_d_name
+from deck d
+join box_definition_m2m_deck_definition bd_d on d.box_definition_m2m_deck_definition_id = bd_d.id
+join deck_definition d_d on d_d.id = bd_d.deck_definition_id
+join deck_definition_m2m_card_definition dc_d on d_d.id = dc_d.deck_definition_id
+join card_definition c_d on dc_d.card_definition_id = c_d.id
+</pre>
+</td>
+</tr>
+</table>
+</Body>
+</HTML>
