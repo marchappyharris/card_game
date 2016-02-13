@@ -14,19 +14,6 @@ from django.db import models
 ###########################################
 
 
-class GameDefinition(models.Model):
-    box_definition = models.ForeignKey('BoxDefinition', models.DO_NOTHING)
-    initial_collection_definition = models.ForeignKey(CollectionDefinition, models.DO_NOTHING)
-    name = models.CharField(max_length=255)
-
-    def __unicode__(self):
-        return "{} {}: {}".format(self.__class__.__name__, self.id, self.name)
-
-    class Meta:
-        managed = False
-        db_table = 'game_definition'
-
-
 class CollectionDefinition(models.Model):
     per_player = models.BooleanField()
     name = models.CharField(max_length=255)
@@ -39,6 +26,18 @@ class CollectionDefinition(models.Model):
         managed = False
         db_table = 'collection_definition'
 
+
+class GameDefinition(models.Model):
+    box_definition = models.ForeignKey('BoxDefinition', models.DO_NOTHING)
+    initial_collection_definition = models.ForeignKey(CollectionDefinition, models.DO_NOTHING)
+    name = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return "{} {}: {}".format(self.__class__.__name__, self.id, self.name)
+
+    class Meta:
+        managed = False
+        db_table = 'game_definition'
 
 class CollectionDefinitionParentChild(models.Model):
     child_collection_definition = models.ForeignKey(CollectionDefinition,

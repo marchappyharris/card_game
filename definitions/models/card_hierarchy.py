@@ -53,6 +53,23 @@ class DeckDefinition(models.Model):
         db_table = 'deck_definition'
 
 
+class CardDefinition(models.Model):
+    front_face_definition = models.ForeignKey('FaceDefinition',
+                                              models.DO_NOTHING,
+                                              related_name='card_definition_front_face')
+    back_face_definition = models.ForeignKey('FaceDefinition',
+                                             models.DO_NOTHING,
+                                             related_name='card_definition_back_face')
+    name = models.CharField(max_length=255)
+
+    def __unicode__(self):
+        return "{} {}: {}".format(self.__class__.__name__, self.id, self.name)
+
+    class Meta:
+        managed = False
+        db_table = 'card_definition'
+
+
 class DeckDefinitionM2MCardDefinition(models.Model):
     deck_definition = models.ForeignKey(DeckDefinition, models.DO_NOTHING)
     card_definition = models.ForeignKey(CardDefinition, models.DO_NOTHING)
@@ -69,23 +86,6 @@ class DeckDefinitionM2MCardDefinition(models.Model):
         managed = False
         db_table = 'deck_definition_m2m_card_definition'
         unique_together = (('card_definition', 'deck_definition', 'ordinal'),)
-
-
-class CardDefinition(models.Model):
-    front_face_definition = models.ForeignKey('FaceDefinition',
-                                              models.DO_NOTHING,
-                                              related_name='card_definition_front_face')
-    back_face_definition = models.ForeignKey('FaceDefinition',
-                                             models.DO_NOTHING,
-                                             related_name='card_definition_back_face')
-    name = models.CharField(max_length=255)
-
-    def __unicode__(self):
-        return "{} {}: {}".format(self.__class__.__name__, self.id, self.name)
-
-    class Meta:
-        managed = False
-        db_table = 'card_definition'
 
 
 class FaceDefinition(models.Model):

@@ -60,6 +60,14 @@
       <Cl au="0" df="" nm="deck_id" nu="0">
         <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
+      <Cl au="0" df="" nm="card_in_collection_id" nu="1">
+        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_card_card_in_collection" prLkCl="id" upAc="3">
+        <PrTb mn="0" nm="card_in_collection" oe="1" sch="cg_schema" zr="1"/>
+        <CdTb mn="0" nm="card" oe="1" sch="cg_schema" zr="0"/>
+        <ClPr cdCl="card_in_collection_id" prCl="id"/>
+      </Fk>
       <Fk deAc="3" nm="fk_card_deck" prLkCl="id" upAc="3">
         <PrTb mn="0" nm="deck" oe="1" sch="cg_schema" zr="0"/>
         <CdTb mn="1" nm="card" oe="0" sch="cg_schema" zr="1"/>
@@ -70,6 +78,10 @@
         <CdTb mn="1" nm="card" oe="0" sch="cg_schema" zr="1"/>
         <ClPr cdCl="deck_definition_m2m_card_definition_id" prCl="id"/>
       </Fk>
+      <Idx clu="0" ftx="0" nm="card_card_in_collection_id_Idx" spa="0" unq="1">
+        <ClNs>card_in_collection_id</ClNs>
+        <OptTx/>
+      </Idx>
       <UniqueConstraints/>
       <SchTrHis/>
     </Tbl>
@@ -184,14 +196,9 @@
       <Cl au="0" df="" nm="orientation_type_id" nu="1">
         <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
-      <Cl au="0" df="" nm="card_id" nu="0">
-        <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      <Cl au="0" df="" nm="my_ref" nu="0">
+        <DT arr="0" ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
-      <Fk deAc="3" nm="fk_card_in_collection_card" prLkCl="id" upAc="3">
-        <PrTb mn="0" nm="card" oe="1" sch="cg_schema" zr="0"/>
-        <CdTb mn="0" nm="card_in_collection" oe="1" sch="cg_schema" zr="1"/>
-        <ClPr cdCl="card_id" prCl="id"/>
-      </Fk>
       <Fk deAc="3" nm="fk_card_in_collection_collection" prLkCl="id" upAc="3">
         <PrTb mn="0" nm="collection" oe="1" sch="cg_schema" zr="0"/>
         <CdTb mn="1" nm="card_in_collection" oe="0" sch="cg_schema" zr="1"/>
@@ -202,8 +209,8 @@
         <CdTb mn="1" nm="card_in_collection" oe="0" sch="cg_schema" zr="1"/>
         <ClPr cdCl="orientation_type_id" prCl="id"/>
       </Fk>
-      <Idx clu="0" ftx="0" nm="card_in_collection_card_id_Idx" spa="0" unq="1">
-        <ClNs>card_id</ClNs>
+      <Idx clu="0" ftx="0" nm="card_in_collection_my_ref_Idx" spa="0" unq="1">
+        <ClNs>my_ref</ClNs>
         <OptTx/>
       </Idx>
       <UniqueConstraints/>
@@ -833,7 +840,7 @@ join card_definition c_d on dc_d.card_definition_id = c_d.id
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="SOUTH" nm="cg_schema.card_definition_attribute.fk_card_definition_attribute_card_definition_attribute_definiti" parentEdge="NORTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="895" x2="895" y1="864" y2="797"/>
+        <positionableLine lineRole="SINGLE_LINE" x1="720" x2="720" y1="864" y2="797"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="SOUTH" nm="cg_schema.card_definition_attribute_definition.fk_card_definition_attribute_definition_card_type" parentEdge="NORTH" positioner="OneLineUserLinkPositioner">
@@ -924,6 +931,11 @@ join card_definition c_d on dc_d.card_definition_id = c_d.id
     <TbGl bkCl="ff6666ff" sch="cg_schema" tbl="grid_proximity_type" x="609" y="1036"/>
     <TbGl bkCl="ff6666ff" sch="cg_schema" tbl="orientation_type" x="949" y="841"/>
     <TbGl bkCl="ff6666ff" sch="cg_schema" tbl="game_definition" x="1421" y="261"/>
+    <FkGl bkCl="ff000000" childEdge="SOUTH" nm="cg_schema.card.fk_card_card_in_collection" parentEdge="NORTH" positioner="OneLineUserLinkPositioner">
+      <positionableLines>
+        <positionableLine lineRole="SINGLE_LINE" x1="511" x2="511" y1="805" y2="604"/>
+      </positionableLines>
+    </FkGl>
     <FkGl bkCl="ff000000" childEdge="NORTH" nm="cg_schema.card.fk_card_deck" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
       <positionableLines>
         <positionableLine lineRole="SINGLE_LINE" x1="286" x2="286" y1="439" y2="525"/>
@@ -939,11 +951,6 @@ join card_definition c_d on dc_d.card_definition_id = c_d.id
         <positionableLine lineRole="PARENT_LINE" x1="442" x2="314" y1="812" y2="812"/>
         <positionableLine lineRole="CHILD_LINE" x1="253" x2="306" y1="751" y2="751"/>
         <positionableLine lineRole="MIDDLE_LINE" x1="310" x2="310" y1="755" y2="808"/>
-      </positionableLines>
-    </FkGl>
-    <FkGl bkCl="ff000000" childEdge="NORTH" nm="cg_schema.card_in_collection.fk_card_in_collection_card" parentEdge="SOUTH" positioner="OneLineUserLinkPositioner">
-      <positionableLines>
-        <positionableLine lineRole="SINGLE_LINE" x1="512" x2="512" y1="591" y2="805"/>
       </positionableLines>
     </FkGl>
     <FkGl bkCl="ff000000" childEdge="EAST" nm="cg_schema.card_in_collection.fk_card_in_collection_collection" parentEdge="SOUTH" positioner="TwoLineUserLinkPositioner">
@@ -1178,8 +1185,8 @@ join card_definition c_d on dc_d.card_definition_id = c_d.id
     </BasicOptionMgr>
   </DbDocOptionMgr>
   <OpenEditors>
-    <OpenEditor ClsNm="Diagram" fqn="null.card_game_instances" selected="0"/>
-    <OpenEditor ClsNm="Diagram" fqn="null.card_game_definitions" selected="1"/>
+    <OpenEditor ClsNm="Diagram" fqn="null.card_game_instances" selected="1"/>
+    <OpenEditor ClsNm="Diagram" fqn="null.card_game_definitions" selected="0"/>
   </OpenEditors>
   <TreePaths>
     <TreePath/>

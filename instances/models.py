@@ -113,14 +113,11 @@ where card.id = x.card_id
 # Instances
 ##################################
 
-class Card(models.Model):
-    deck_definition_m2m_card_definition = models.ForeignKey('definitions.DeckDefinitionM2MCardDefinition',
-                                                            models.DO_NOTHING)
-    deck = models.ForeignKey('Deck', models.DO_NOTHING)
 
-    def __unicode__(self):
-        return "{} {}: {}, {}".format(self.__class__.__name__, self.id, self.deck,
-                                      self.deck_definition_m2m_card_definition)
+class Card(models.Model):
+    deck_definition_m2m_card_definition = models.ForeignKey('definitions.DeckDefinitionM2MCardDefinition', models.DO_NOTHING)
+    deck = models.ForeignKey('Deck', models.DO_NOTHING)
+    card_in_collection = models.ForeignKey('CardInCollection', models.DO_NOTHING, unique=True, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -144,10 +141,7 @@ class CardInCollection(models.Model):
     visible_to_others = models.BooleanField()
     visible_to_player = models.BooleanField()
     orientation_type = models.ForeignKey('definitions.OrientationType', models.DO_NOTHING, blank=True, null=True)
-    card = models.ForeignKey(Card, models.DO_NOTHING, unique=True)
-
-    def __unicode__(self):
-        return "{} {}: {} in {}".format(self.__class__.__name__, self.id, self.card, self.collection)
+    my_ref = models.BigIntegerField(unique=True)
 
     class Meta:
         managed = False
