@@ -68,13 +68,3 @@ class OrientationType(models.Model):
         managed = False
         db_table = 'orientation_type'
 
-
-class VisibilityType(models.Model):
-    visibility = models.CharField(max_length=255, blank=True, null=True)
-
-    def __unicode__(self):
-        return "{} {}: {}".format(self.__class__.__name__, self.id, self.visibility)
-
-    class Meta:
-        managed = False
-        db_table = 'visibility_type'

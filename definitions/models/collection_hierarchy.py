@@ -39,6 +39,7 @@ class GameDefinition(models.Model):
         managed = False
         db_table = 'game_definition'
 
+
 class CollectionDefinitionParentChild(models.Model):
     child_collection_definition = models.ForeignKey(CollectionDefinition,
                                                     models.DO_NOTHING,
@@ -49,7 +50,10 @@ class CollectionDefinitionParentChild(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True)
 
     def __unicode__(self):
-        return "{} {}: {}".format(self.__class__.__name__, self.id, self.name)
+        return "{} {}: {} = {}->{}".format(self.__class__.__name__,
+                                           self.id, self.name,
+                                           self.parent_collection_definition.name,
+                                           self.child_collection_definition.name)
 
     class Meta:
         managed = False

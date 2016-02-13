@@ -21,5 +21,4 @@ admin.site.register(GameDefinition)
 admin.site.register(GridDirectionType)
 admin.site.register(GridProximityType)
 admin.site.register(OrientationType)
-admin.site.register(VisibilityType)
 
