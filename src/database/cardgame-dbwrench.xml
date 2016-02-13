@@ -290,6 +290,7 @@
     </Tbl>
     <Tbl UsSo="1" nm="card_in_tabletop">
       <TblOpts>WITHOUT OIDS</TblOpts>
+      <Pk ClNs="card_in_collection_id" nm="pkcard_in_tabletop"/>
       <Cl au="0" df="" nm="card_in_collection_id" nu="0">
         <DT arr="0" ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
       </Cl>
