@@ -37,7 +37,8 @@ class CardInCollection(models.Model):
 
 
 class CardInArray(models.Model):
-    card_in_collection = models.ForeignKey('CardInCollection', models.DO_NOTHING, primary_key=True)
+    card_in_collection = models.OneToOneField(CardInCollection, on_delete=models.CASCADE, primary_key=True)
+#    card_in_collection = models.ForeignKey('CardInCollection', models.DO_NOTHING, primary_key=True)
     ordinal = models.IntegerField()
 
     def __unicode__(self):
@@ -51,7 +52,7 @@ class CardInArray(models.Model):
 
 
 class CardInFan(models.Model):
-    card_in_collection = models.ForeignKey(CardInCollection, models.DO_NOTHING, primary_key=True)
+    card_in_collection = models.OneToOneField(CardInCollection, models.CASCADE, primary_key=True)
     ordinal = models.IntegerField()
 
     def __unicode__(self):
@@ -65,7 +66,7 @@ class CardInFan(models.Model):
 
 
 class CardInGrid(models.Model):
-    card_in_collection = models.ForeignKey(CardInCollection, models.DO_NOTHING, primary_key=True)
+    card_in_collection = models.OneToOneField(CardInCollection, models.CASCADE, primary_key=True)
     other_card = models.ForeignKey('self', models.DO_NOTHING, db_column='other_card', blank=True, null=True)
     grid_direction_type = models.ForeignKey('definitions.GridDirectionType', models.DO_NOTHING, blank=True, null=True)
     grid_proximity_type = models.ForeignKey('definitions.GridProximityType', models.DO_NOTHING, blank=True, null=True)
@@ -98,7 +99,7 @@ class CardInGrid(models.Model):
 
 
 class CardInPile(models.Model):
-    card_in_collection = models.ForeignKey(CardInCollection, models.DO_NOTHING, primary_key=True)
+    card_in_collection = models.OneToOneField(CardInCollection, models.CASCADE, primary_key=True)
     ordinal = models.IntegerField()
 
     def __unicode__(self):
@@ -112,7 +113,7 @@ class CardInPile(models.Model):
 
 
 class CardInTabletop(models.Model):
-    card_in_collection = models.ForeignKey(CardInCollection, models.DO_NOTHING, primary_key=True)
+    card_in_collection = models.OneToOneField(CardInCollection, models.CASCADE, primary_key=True)
     z_order = models.IntegerField()
     y = models.FloatField()
     x = models.FloatField()

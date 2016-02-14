@@ -18,7 +18,7 @@ from definitions.models import *
 class Card(models.Model):
     deck_definition_m2m_card_definition = models.ForeignKey('definitions.DeckDefinitionM2MCardDefinition', models.DO_NOTHING)
     deck = models.ForeignKey('Deck', models.DO_NOTHING)
-    card_in_collection = models.ForeignKey('CardInCollection', models.DO_NOTHING, unique=True, blank=True, null=True)
+    card_in_collection = models.OneToOneField('CardInCollection', models.DO_NOTHING, unique=True, blank=True, null=True)
 
     def __unicode__(self):
         if (self.card_in_collection == None):
