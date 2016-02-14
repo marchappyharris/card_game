@@ -1371,33 +1371,12 @@ COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
 16	Can add session	6	add_session
 17	Can change session	6	change_session
 18	Can delete session	6	delete_session
-19	Can add auth group	7	add_authgroup
-20	Can change auth group	7	change_authgroup
-21	Can delete auth group	7	delete_authgroup
-22	Can add auth group permissions	8	add_authgrouppermissions
-23	Can change auth group permissions	8	change_authgrouppermissions
-24	Can delete auth group permissions	8	delete_authgrouppermissions
-25	Can add auth permission	9	add_authpermission
-26	Can change auth permission	9	change_authpermission
-27	Can delete auth permission	9	delete_authpermission
-28	Can add auth user	10	add_authuser
-29	Can change auth user	10	change_authuser
-30	Can delete auth user	10	delete_authuser
-31	Can add auth user groups	11	add_authusergroups
-32	Can change auth user groups	11	change_authusergroups
-33	Can delete auth user groups	11	delete_authusergroups
-34	Can add auth user user permissions	12	add_authuseruserpermissions
-35	Can change auth user user permissions	12	change_authuseruserpermissions
-36	Can delete auth user user permissions	12	delete_authuseruserpermissions
 37	Can add box definition	13	add_boxdefinition
 38	Can change box definition	13	change_boxdefinition
 39	Can delete box definition	13	delete_boxdefinition
 40	Can add box definition m2m deck definition	14	add_boxdefinitionm2mdeckdefinition
 41	Can change box definition m2m deck definition	14	change_boxdefinitionm2mdeckdefinition
 42	Can delete box definition m2m deck definition	14	delete_boxdefinitionm2mdeckdefinition
-43	Can add card	15	add_card
-44	Can change card	15	change_card
-45	Can delete card	15	delete_card
 46	Can add card definition	16	add_carddefinition
 47	Can change card definition	16	change_carddefinition
 48	Can delete card definition	16	delete_carddefinition
@@ -1407,30 +1386,9 @@ COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
 52	Can add card definition attribute definition	18	add_carddefinitionattributedefinition
 53	Can change card definition attribute definition	18	change_carddefinitionattributedefinition
 54	Can delete card definition attribute definition	18	delete_carddefinitionattributedefinition
-55	Can add card in array	19	add_cardinarray
-56	Can change card in array	19	change_cardinarray
-57	Can delete card in array	19	delete_cardinarray
-58	Can add card in collection	20	add_cardincollection
-59	Can change card in collection	20	change_cardincollection
-60	Can delete card in collection	20	delete_cardincollection
-61	Can add card in fan	21	add_cardinfan
-62	Can change card in fan	21	change_cardinfan
-63	Can delete card in fan	21	delete_cardinfan
-64	Can add card in grid	22	add_cardingrid
-65	Can change card in grid	22	change_cardingrid
-66	Can delete card in grid	22	delete_cardingrid
-67	Can add card in pile	23	add_cardinpile
-68	Can change card in pile	23	change_cardinpile
-69	Can delete card in pile	23	delete_cardinpile
-70	Can add card in tabletop	24	add_cardintabletop
-71	Can change card in tabletop	24	change_cardintabletop
-72	Can delete card in tabletop	24	delete_cardintabletop
 73	Can add card type	25	add_cardtype
 74	Can change card type	25	change_cardtype
 75	Can delete card type	25	delete_cardtype
-76	Can add collection	26	add_collection
-77	Can change collection	26	change_collection
-78	Can delete collection	26	delete_collection
 79	Can add collection definition	27	add_collectiondefinition
 80	Can change collection definition	27	change_collectiondefinition
 81	Can delete collection definition	27	delete_collectiondefinition
@@ -1440,36 +1398,18 @@ COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
 85	Can add collection type	29	add_collectiontype
 86	Can change collection type	29	change_collectiontype
 87	Can delete collection type	29	delete_collectiontype
-88	Can add deck	30	add_deck
-89	Can change deck	30	change_deck
-90	Can delete deck	30	delete_deck
 91	Can add deck definition	31	add_deckdefinition
 92	Can change deck definition	31	change_deckdefinition
 93	Can delete deck definition	31	delete_deckdefinition
 94	Can add deck definition m2m card definition	32	add_deckdefinitionm2mcarddefinition
 95	Can change deck definition m2m card definition	32	change_deckdefinitionm2mcarddefinition
 96	Can delete deck definition m2m card definition	32	delete_deckdefinitionm2mcarddefinition
-97	Can add django admin log	33	add_djangoadminlog
-98	Can change django admin log	33	change_djangoadminlog
-99	Can delete django admin log	33	delete_djangoadminlog
-100	Can add django content type	34	add_djangocontenttype
-101	Can change django content type	34	change_djangocontenttype
-102	Can delete django content type	34	delete_djangocontenttype
-103	Can add django migrations	35	add_djangomigrations
-104	Can change django migrations	35	change_djangomigrations
-105	Can delete django migrations	35	delete_djangomigrations
-106	Can add django session	36	add_djangosession
-107	Can change django session	36	change_djangosession
-108	Can delete django session	36	delete_djangosession
 109	Can add face definition	37	add_facedefinition
 110	Can change face definition	37	change_facedefinition
 111	Can delete face definition	37	delete_facedefinition
 112	Can add game definition	38	add_gamedefinition
 113	Can change game definition	38	change_gamedefinition
 114	Can delete game definition	38	delete_gamedefinition
-115	Can add game session	39	add_gamesession
-116	Can change game session	39	change_gamesession
-117	Can delete game session	39	delete_gamesession
 118	Can add grid direction type	40	add_griddirectiontype
 119	Can change grid direction type	40	change_griddirectiontype
 120	Can delete grid direction type	40	delete_griddirectiontype
@@ -1479,15 +1419,42 @@ COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
 124	Can add orientation type	42	add_orientationtype
 125	Can change orientation type	42	change_orientationtype
 126	Can delete orientation type	42	delete_orientationtype
-127	Can add player	43	add_player
-128	Can change player	43	change_player
-129	Can delete player	43	delete_player
-130	Can add player m2m game session	44	add_playerm2mgamesession
-131	Can change player m2m game session	44	change_playerm2mgamesession
-132	Can delete player m2m game session	44	delete_playerm2mgamesession
-133	Can add visibility type	45	add_visibilitytype
-134	Can change visibility type	45	change_visibilitytype
-135	Can delete visibility type	45	delete_visibilitytype
+136	Can add card in collection	48	add_cardincollection
+137	Can change card in collection	48	change_cardincollection
+138	Can delete card in collection	48	delete_cardincollection
+139	Can add card in array	49	add_cardinarray
+140	Can change card in array	49	change_cardinarray
+141	Can delete card in array	49	delete_cardinarray
+142	Can add card in fan	50	add_cardinfan
+143	Can change card in fan	50	change_cardinfan
+144	Can delete card in fan	50	delete_cardinfan
+145	Can add card in grid	47	add_cardingrid
+146	Can change card in grid	47	change_cardingrid
+147	Can delete card in grid	47	delete_cardingrid
+148	Can add card in pile	51	add_cardinpile
+149	Can change card in pile	51	change_cardinpile
+150	Can delete card in pile	51	delete_cardinpile
+151	Can add card in tabletop	52	add_cardintabletop
+152	Can change card in tabletop	52	change_cardintabletop
+153	Can delete card in tabletop	52	delete_cardintabletop
+154	Can add card	46	add_card
+155	Can change card	46	change_card
+156	Can delete card	46	delete_card
+157	Can add collection	53	add_collection
+158	Can change collection	53	change_collection
+159	Can delete collection	53	delete_collection
+160	Can add deck	54	add_deck
+161	Can change deck	54	change_deck
+162	Can delete deck	54	delete_deck
+163	Can add game session	55	add_gamesession
+164	Can change game session	55	change_gamesession
+165	Can delete game session	55	delete_gamesession
+166	Can add player	56	add_player
+167	Can change player	56	change_player
+168	Can delete player	56	delete_player
+169	Can add player m2m game session	57	add_playerm2mgamesession
+170	Can change player m2m game session	57	change_playerm2mgamesession
+171	Can delete player m2m game session	57	delete_playerm2mgamesession
 \.
 
 
@@ -1495,7 +1462,7 @@ COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
 -- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: cg_schema; Owner: mharris
 --
 
-SELECT pg_catalog.setval('auth_permission_id_seq', 135, true);
+SELECT pg_catalog.setval('auth_permission_id_seq', 171, true);
 
 
 --
@@ -3147,47 +3114,34 @@ COPY django_content_type (id, app_label, model) FROM stdin;
 4	auth	user
 5	contenttypes	contenttype
 6	sessions	session
-7	definitions	authgroup
-8	definitions	authgrouppermissions
-9	definitions	authpermission
-10	definitions	authuser
-11	definitions	authusergroups
-12	definitions	authuseruserpermissions
 13	definitions	boxdefinition
 14	definitions	boxdefinitionm2mdeckdefinition
-15	definitions	card
 16	definitions	carddefinition
 17	definitions	carddefinitionattribute
 18	definitions	carddefinitionattributedefinition
-19	definitions	cardinarray
-20	definitions	cardincollection
-21	definitions	cardinfan
-22	definitions	cardingrid
-23	definitions	cardinpile
-24	definitions	cardintabletop
 25	definitions	cardtype
-26	definitions	collection
 27	definitions	collectiondefinition
 28	definitions	collectiondefinitionparentchild
 29	definitions	collectiontype
-30	definitions	deck
 31	definitions	deckdefinition
 32	definitions	deckdefinitionm2mcarddefinition
-33	definitions	djangoadminlog
-34	definitions	djangocontenttype
-35	definitions	djangomigrations
-36	definitions	djangosession
 37	definitions	facedefinition
 38	definitions	gamedefinition
-39	definitions	gamesession
 40	definitions	griddirectiontype
 41	definitions	gridproximitytype
 42	definitions	orientationtype
-43	definitions	player
-44	definitions	playerm2mgamesession
-45	definitions	visibilitytype
 46	instances	card
 47	instances	cardingrid
+48	instances	cardincollection
+49	instances	cardinarray
+50	instances	cardinfan
+51	instances	cardinpile
+52	instances	cardintabletop
+53	instances	collection
+54	instances	deck
+55	instances	gamesession
+56	instances	player
+57	instances	playerm2mgamesession
 \.
 
 
@@ -3195,7 +3149,7 @@ COPY django_content_type (id, app_label, model) FROM stdin;
 -- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: cg_schema; Owner: mharris
 --
 
-SELECT pg_catalog.setval('django_content_type_id_seq', 47, true);
+SELECT pg_catalog.setval('django_content_type_id_seq', 57, true);
 
 
 --
@@ -3216,6 +3170,7 @@ COPY django_migrations (id, app, name, applied) FROM stdin;
 11	auth	0007_alter_validators_add_error_messages	2016-01-29 22:06:12.639556-05
 12	sessions	0001_initial	2016-01-29 22:06:12.648239-05
 13	definitions	0001_initial	2016-01-30 01:09:29.303011-05
+14	instances	0001_initial	2016-02-13 19:37:34.747626-05
 \.
 
 
@@ -3223,7 +3178,7 @@ COPY django_migrations (id, app, name, applied) FROM stdin;
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: cg_schema; Owner: mharris
 --
 
-SELECT pg_catalog.setval('django_migrations_id_seq', 13, true);
+SELECT pg_catalog.setval('django_migrations_id_seq', 14, true);
 
 
 --
