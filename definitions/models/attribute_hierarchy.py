@@ -19,9 +19,11 @@ class CardDefinitionAttribute(models.Model):
     value = models.CharField(max_length=255, blank=True, null=True)
     card_definition = models.ForeignKey('CardDefinition', models.DO_NOTHING)
 
+    def __repr__(self):
+        return "{} {}".format(self.__class__.__name__, str(self))
+
     def __unicode__(self):
-        return "{} {}: {}, {}={}".format(self.__class__.__name__,
-                                         self.id,
+        return "{}: {}, {}={}".format(self.id,
                                          self.card_definition,
                                          self.card_definition_attribute_definition,
                                          self.value)
@@ -35,8 +37,11 @@ class CardDefinitionAttributeDefinition(models.Model):
     name = models.CharField(max_length=255)
     card_type = models.ForeignKey('CardType', models.DO_NOTHING)
 
+    def __repr__(self):
+        return "{} {}".format(self.__class__.__name__, str(self))
+
     def __unicode__(self):
-        return "{} {}: {}".format(self.__class__.__name__, self.id, self.card_type, self.name)
+        return "{}: {}".format(self.id, self.card_type, self.name)
 
     class Meta:
         managed = False

@@ -3,22 +3,28 @@ from django.contrib import admin
 # Register your models here.
 
 from django.contrib import admin
+from django.contrib.admin import ModelAdmin
 from .models import *
 
-admin.site.register(BoxDefinition)
-admin.site.register(BoxDefinitionM2MDeckDefinition)
-admin.site.register(CardDefinition)
-admin.site.register(CardDefinitionAttribute)
-admin.site.register(CardDefinitionAttributeDefinition)
-admin.site.register(CardType)
-admin.site.register(CollectionDefinition)
-admin.site.register(CollectionDefinitionParentChild)
-admin.site.register(CollectionType)
-admin.site.register(DeckDefinition)
-admin.site.register(DeckDefinitionM2MCardDefinition)
-admin.site.register(FaceDefinition)
-admin.site.register(GameDefinition)
-admin.site.register(GridDirectionType)
-admin.site.register(GridProximityType)
-admin.site.register(OrientationType)
+
+class IdOrderedModelAdmin(ModelAdmin):
+    ordering = ['id']
+
+
+admin.site.register(BoxDefinition, IdOrderedModelAdmin)
+admin.site.register(BoxDefinitionM2MDeckDefinition, IdOrderedModelAdmin)
+admin.site.register(CardDefinition, IdOrderedModelAdmin)
+admin.site.register(CardDefinitionAttribute, IdOrderedModelAdmin)
+admin.site.register(CardDefinitionAttributeDefinition, IdOrderedModelAdmin)
+admin.site.register(CardType, IdOrderedModelAdmin)
+admin.site.register(CollectionDefinition, IdOrderedModelAdmin)
+admin.site.register(CollectionDefinitionParentChild, IdOrderedModelAdmin)
+admin.site.register(CollectionType, IdOrderedModelAdmin)
+admin.site.register(DeckDefinition, IdOrderedModelAdmin)
+admin.site.register(DeckDefinitionM2MCardDefinition, IdOrderedModelAdmin)
+admin.site.register(FaceDefinition, IdOrderedModelAdmin)
+admin.site.register(GameDefinition, IdOrderedModelAdmin)
+admin.site.register(GridDirectionType, IdOrderedModelAdmin)
+admin.site.register(GridProximityType, IdOrderedModelAdmin)
+admin.site.register(OrientationType, IdOrderedModelAdmin)
 

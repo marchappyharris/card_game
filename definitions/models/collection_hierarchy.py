@@ -19,8 +19,11 @@ class CollectionDefinition(models.Model):
     name = models.CharField(max_length=255)
     collection_type = models.ForeignKey('CollectionType', models.DO_NOTHING)
 
+    def __repr__(self):
+        return "{} {}".format(self.__class__.__name__, str(self))
+
     def __unicode__(self):
-        return "{} {}: {}".format(self.__class__.__name__, self.id, self.name)
+        return "{}: {}".format(self.id, self.name)
 
     class Meta:
         managed = False
@@ -32,8 +35,11 @@ class GameDefinition(models.Model):
     initial_collection_definition = models.ForeignKey(CollectionDefinition, models.DO_NOTHING)
     name = models.CharField(max_length=255)
 
+    def __repr__(self):
+        return "{} {}".format(self.__class__.__name__, str(self))
+
     def __unicode__(self):
-        return "{} {}: {}".format(self.__class__.__name__, self.id, self.name)
+        return "{}: {}".format(self.id, self.name)
 
     class Meta:
         managed = False
@@ -49,9 +55,11 @@ class CollectionDefinitionParentChild(models.Model):
                                                      related_name='collection_definition_parent')
     name = models.CharField(max_length=255, blank=True, null=True)
 
+    def __repr__(self):
+        return "{} {}".format(self.__class__.__name__, str(self))
+
     def __unicode__(self):
-        return "{} {}: {} = {}->{}".format(self.__class__.__name__,
-                                           self.id, self.name,
+        return "{}: {} = {}->{}".format(self.id, self.name,
                                            self.parent_collection_definition.name,
                                            self.child_collection_definition.name)
 

@@ -21,10 +21,12 @@ class CardInCollection(models.Model):
     orientation_type = models.ForeignKey('definitions.OrientationType', models.DO_NOTHING, blank=True, null=True)
     my_ref = models.BigIntegerField(unique=True)
 
+    def __repr__(self):
+        return "{} {}".format(self.__class__.__name__, str(self))
+
     def __unicode__(self):
-        return "{} {}: ({}), visible_to_others={}, visible_to_player={}, orientation={}, my_ref={}".\
-            format(self.__class__.__name__,
-                   self.id,
+        return "{}: ({}), visible_to_others={}, visible_to_player={}, orientation={}, my_ref={}".\
+            format(self.id,
                    self.collection,
                    self.visible_to_others,
                    self.visible_to_player,

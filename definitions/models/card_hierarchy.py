@@ -17,8 +17,11 @@ from django.db import models
 class BoxDefinition(models.Model):
     name = models.CharField(max_length=255)
 
+    def __repr__(self):
+        return "{} {}".format(self.__class__.__name__, str(self))
+
     def __unicode__(self):
-        return "{} {}: {}".format(self.__class__.__name__, self.id, self.name)
+        return "{}: {}".format(self.id, self.name)
 
     class Meta:
         managed = False
@@ -30,9 +33,11 @@ class BoxDefinitionM2MDeckDefinition(models.Model):
     box_definition = models.ForeignKey(BoxDefinition, models.DO_NOTHING)
     deck_name = models.CharField(max_length=255)
 
+    def __repr__(self):
+        return "{} {}".format(self.__class__.__name__, str(self))
+
     def __unicode__(self):
-        return "{} {}: {}, {}, {}".format(self.__class__.__name__,
-                                          self.id,
+        return "{}: Box {}, Deck {}, {}".format(self.id,
                                           self.box_definition,
                                           self.deck_definition, self.deck_name)
 
@@ -45,8 +50,11 @@ class BoxDefinitionM2MDeckDefinition(models.Model):
 class DeckDefinition(models.Model):
     name = models.CharField(unique=True, max_length=255)
 
+    def __repr__(self):
+        return "{} {}".format(self.__class__.__name__, str(self))
+
     def __unicode__(self):
-        return "{} {}: {}".format(self.__class__.__name__, self.id, self.name)
+        return "{}: {}".format(self.id, self.name)
 
     class Meta:
         managed = False
@@ -62,8 +70,11 @@ class CardDefinition(models.Model):
                                              related_name='card_definition_back_face')
     name = models.CharField(max_length=255)
 
+    def __repr__(self):
+        return "{} {}".format(self.__class__.__name__, str(self))
+
     def __unicode__(self):
-        return "{} {}: {}".format(self.__class__.__name__, self.id, self.name)
+        return "{}: {}".format(self.id, self.name)
 
     class Meta:
         managed = False
@@ -75,9 +86,11 @@ class DeckDefinitionM2MCardDefinition(models.Model):
     card_definition = models.ForeignKey(CardDefinition, models.DO_NOTHING)
     ordinal = models.IntegerField()
 
+    def __repr__(self):
+        return "{} {}".format(self.__class__.__name__, str(self))
+
     def __unicode__(self):
-        return "{} {}: {}, {}, {}".format(self.__class__.__name__,
-                                          self.id,
+        return "{}: {}, {}, {}".format(self.id,
                                           self.deck_definition,
                                           self.card_definition,
                                           self.ordinal)
@@ -93,8 +106,11 @@ class FaceDefinition(models.Model):
     large_image = models.CharField(max_length=255, blank=True, null=True)
     small_image = models.CharField(max_length=255, blank=True, null=True)
 
+    def __repr__(self):
+        return "{} {}".format(self.__class__.__name__, str(self))
+
     def __unicode__(self):
-        return "{} {}: {}, {}".format(self.__class__.__name__, self.id, self.text_display, self.small_image)
+        return "{}: {}, {}".format(self.id, self.text_display, self.small_image)
 
     class Meta:
         managed = False

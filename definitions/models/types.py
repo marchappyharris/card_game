@@ -17,8 +17,11 @@ from django.db import models
 class CardType(models.Model):
     name = models.CharField(unique=True, max_length=255)
 
+    def __repr__(self):
+        return "{} {}".format(self.__class__.__name__, str(self))
+
     def __unicode__(self):
-        return "{} {}: {}".format(self.__class__.__name__, self.id, self.name)
+        return "{}: {}".format(self.id, self.name)
 
     class Meta:
         managed = False
@@ -28,8 +31,11 @@ class CardType(models.Model):
 class CollectionType(models.Model):
     name = models.CharField(unique=True, max_length=255, blank=True, null=True)
 
+    def __repr__(self):
+        return "{} {}".format(self.__class__.__name__, str(self))
+
     def __unicode__(self):
-        return "{} {}: {}".format(self.__class__.__name__, self.id, self.name)
+        return "{}: {}".format(self.id, self.name)
 
     class Meta:
         managed = False
@@ -39,8 +45,11 @@ class CollectionType(models.Model):
 class GridDirectionType(models.Model):
     label = models.CharField(max_length=255)
 
+    def __repr__(self):
+        return "{} {}".format(self.__class__.__name__, str(self))
+
     def __unicode__(self):
-        return "{} {}: {}".format(self.__class__.__name__, self.id, self.label)
+        return "{}: {}".format(self.id, self.label)
 
     class Meta:
         managed = False
@@ -50,8 +59,11 @@ class GridDirectionType(models.Model):
 class GridProximityType(models.Model):
     label = models.CharField(max_length=255)
 
+    def __repr__(self):
+        return "{} {}".format(self.__class__.__name__, str(self))
+
     def __unicode__(self):
-        return "{} {}: {}".format(self.__class__.__name__, self.id, self.label)
+        return "{}: {}".format(self.id, self.label)
 
     class Meta:
         managed = False
@@ -61,8 +73,11 @@ class GridProximityType(models.Model):
 class OrientationType(models.Model):
     label = models.CharField(max_length=255)
 
+    def __repr__(self):
+        return "{} {}".format(self.__class__.__name__, str(self))
+
     def __unicode__(self):
-        return "{} {}: {}".format(self.__class__.__name__, self.id, self.label)
+        return "{}: {}".format(self.id, self.label)
 
     class Meta:
         managed = False
