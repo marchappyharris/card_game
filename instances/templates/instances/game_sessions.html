@@ -1,0 +1,12 @@
+{% if sessions %}
+<h1>Card Game</h1>
+<h2>Current sessions</h2>
+    
+<ul>
+    {% for session in sessions %}
+    <li><a href="/instances/game_sessions/{{ session.id }}/">{{ session }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No sessions are currently active.</p>
+{% endif %}

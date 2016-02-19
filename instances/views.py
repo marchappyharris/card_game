@@ -1,9 +1,13 @@
 from django.http import HttpResponse
 from .models import GameSession
+from django.template import loader
+
 
 def index(request):
     sessions = GameSession.objects.order_by('game_definition__name')[:10]
-    output = ', '.join([str(session) for session in sessions])
+    template = loader.get_template('instances/game_sessions.html')
+    context = {
+        'sessions': sessions,
+    }
+    return HttpResponse(template.render(context, request))
 
-#    locales = "Current locale: %s %s -- Default locale: %s %s" % (locale.getlocale() + locale.getdefaultlocale())
-    return HttpResponse(output)
