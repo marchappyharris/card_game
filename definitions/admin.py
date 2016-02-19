@@ -7,24 +7,20 @@ from django.contrib.admin import ModelAdmin
 from .models import *
 
 
-class IdOrderedModelAdmin(ModelAdmin):
-    ordering = ['id']
-
-
-admin.site.register(BoxDefinition, IdOrderedModelAdmin)
-admin.site.register(BoxDefinitionM2MDeckDefinition, IdOrderedModelAdmin)
-admin.site.register(CardDefinition, IdOrderedModelAdmin)
-admin.site.register(CardDefinitionAttribute, IdOrderedModelAdmin)
-admin.site.register(CardDefinitionAttributeDefinition, IdOrderedModelAdmin)
-admin.site.register(CardType, IdOrderedModelAdmin)
-admin.site.register(CollectionDefinition, IdOrderedModelAdmin)
-admin.site.register(CollectionDefinitionParentChild, IdOrderedModelAdmin)
-admin.site.register(CollectionType, IdOrderedModelAdmin)
-admin.site.register(DeckDefinition, IdOrderedModelAdmin)
-admin.site.register(DeckDefinitionM2MCardDefinition, IdOrderedModelAdmin)
-admin.site.register(FaceDefinition, IdOrderedModelAdmin)
-admin.site.register(GameDefinition, IdOrderedModelAdmin)
-admin.site.register(GridDirectionType, IdOrderedModelAdmin)
-admin.site.register(GridProximityType, IdOrderedModelAdmin)
-admin.site.register(OrientationType, IdOrderedModelAdmin)
+admin.site.register(BoxDefinition, None, ordering = ['id'])
+admin.site.register(BoxDefinitionM2MDeckDefinition, None, ordering = ['id'])
+admin.site.register(CardDefinition, None, ordering = ['id'])
+admin.site.register(CardDefinitionAttribute, None, ordering = ['id'])
+admin.site.register(CardDefinitionAttributeDefinition, None, ordering = ['id'])
+admin.site.register(CardType, None, ordering = ['id'])
+admin.site.register(CollectionDefinition, None, ordering = ['id'])
+admin.site.register(CollectionDefinitionParentChild, None, ordering = ['id'])
+admin.site.register(CollectionType, None, ordering = ['id'])
+admin.site.register(DeckDefinition, None, ordering = ['id'])
+admin.site.register(DeckDefinitionM2MCardDefinition, None, ordering = ['id'])
+admin.site.register(FaceDefinition, None, ordering = ['id'])
+admin.site.register(GameDefinition, None, ordering = ['id'])
+admin.site.register(GridDirectionType, None, ordering = ['id'])
+admin.site.register(GridProximityType, None, ordering = ['id'])
+admin.site.register(OrientationType, None, ordering = ['id'])
 

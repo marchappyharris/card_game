@@ -7,23 +7,15 @@ from django.contrib.admin import ModelAdmin
 from .models import *
 
 
-class IdOrderedModelAdmin(ModelAdmin):
-    ordering = ['id']
-
-
-class CollectionIdOrderedModelAdmin(ModelAdmin):
-    ordering = ['card_in_collection']
-
-
-admin.site.register(Card, IdOrderedModelAdmin)
-admin.site.register(CardInArray, CollectionIdOrderedModelAdmin)
-admin.site.register(CardInCollection, IdOrderedModelAdmin)
-admin.site.register(CardInFan, CollectionIdOrderedModelAdmin)
-admin.site.register(CardInGrid, CollectionIdOrderedModelAdmin)
-admin.site.register(CardInPile, CollectionIdOrderedModelAdmin)
-admin.site.register(CardInTabletop, CollectionIdOrderedModelAdmin)
-admin.site.register(Collection, IdOrderedModelAdmin)
-admin.site.register(Deck, IdOrderedModelAdmin)
-admin.site.register(GameSession, IdOrderedModelAdmin)
-admin.site.register(Player, IdOrderedModelAdmin)
-admin.site.register(PlayerM2MGameSession, IdOrderedModelAdmin)
+admin.site.register(Card, None, ordering = ['id'])
+admin.site.register(CardInArray, None, ordering = ['card_in_collection'])
+admin.site.register(CardInCollection, None, ordering = ['id'])
+admin.site.register(CardInFan, None, ordering = ['card_in_collection'])
+admin.site.register(CardInGrid, None, ordering = ['card_in_collection'])
+admin.site.register(CardInPile, None, ordering = ['card_in_collection'])
+admin.site.register(CardInTabletop, None, ordering = ['card_in_collection'])
+admin.site.register(Collection, None, ordering = ['id'])
+admin.site.register(Deck, None, ordering = ['id'])
+admin.site.register(GameSession, None, ordering = ['id'])
+admin.site.register(Player, None, ordering = ['id'])
+admin.site.register(PlayerM2MGameSession, None, ordering = ['id'])
